@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Empregados</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Lista de Empregados</h1>
+    </header>
+    <main>
+        <form action="/empregados/pesquisar" method="get">
+            <input type="text" name="nome" placeholder="Pesquisar empregado" required>
+            <button type="submit">Pesquisar</button>
+        </form>
+        <a href="/empregados/novo">Novo Empregado</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Salário Bruto</th>
+                    <th>Salário Líquido</th>
+                    <th>Departamento</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each empregados}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{nome}}</td>
+                    <td>{{salario_bruto}}</td>
+                    <td>{{salario_liquido}}</td>
+                    <td>{{departamento}}</td>
+                    <td>
+                        <a href="/empregados/{{id}}/editar">Editar</a>
+                        <form action="/empregados/{{id}}/deletar" method="post" style="display:inline;">
+                            <button type="submit">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <a href="/empregados/maior-salario">Empregado com o Maior Salário</a>
+        <a href="/empregados/menor-salario">Empregado com o Menor Salário</a>
+        <a href="/empregados/admin-count">Contar Empregados Administrativos</a>
+    </main>
+</body>
+
+</html>

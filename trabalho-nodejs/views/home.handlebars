@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Inicial</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    nav {
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      background-color: #007bff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    a:hover {
+      background-color: #0056b3;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Sistema de Empregados</h1>
+    <nav>
+      <a href="/empregados">Listar Empregados</a>
+      <a href="/empregados/novo">Adicionar Novo Empregado</a>
+      <a href="/empregados/pesquisar">Pesquisar Empregados</a>
+      <a href="/empregados/maior-salario">Empregado com Maior Salário</a>
+      <a href="/empregados/menor-salario">Empregado com Menor Salário</a>
+      <a href="/empregados/admin-count">Contar Empregados no Setor Administrativo</a>
+    </nav>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Empregado</title>
+    <link rel="stylesheet" href="/styles/styles.css"> <!-- Inclua seu CSS aqui -->
+</head>
+
+<body>
+    <header>
+        <h1>Detalhes do Empregado</h1>
+    </header>
+    <main>
+        <p>ID: {{empregado.id}}</p>
+        <p>Nome: {{empregado.nome}}</p>
+        <p>Salário Bruto: {{empregado.salario_bruto}}</p>
+        <p>Salário Líquido: {{empregado.salario_liquido}}</p>
+        <p>Departamento: {{empregado.departamento}}</p>
+        <a href="/empregados">Voltar à lista de empregados</a>
+    </main>
+</body>
+
+</html>
