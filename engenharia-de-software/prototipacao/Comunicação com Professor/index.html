@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicação com o Professor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header,
+        .footer {
+            background-color: #4caf50;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1,
+        .footer p {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+
+        .messages-section {
+            margin-top: 20px;
+        }
+
+        .message-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Comunicação com o Professor</h1>
+    </header>
+
+    <div class="container">
+        <h2>Envie uma Mensagem</h2>
+        <form id="comunicacaoForm" onsubmit="enviarMensagem(event)">
+            <div class="form-group">
+                <label for="professor">Selecione o Professor:</label>
+                <select id="professor" required>
+                    <option value="">Selecione</option>
+                    <option value="Professor João">Professor João</option>
+                    <option value="Professora Maria">Professora Maria</option>
+                    <option value="Professor Pedro">Professor Pedro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="mensagem">Mensagem:</label>
+                <textarea id="mensagem" rows="4" placeholder="Digite sua mensagem..." required></textarea>
+            </div>
+            <button type="submit" class="btn">Enviar</button>
+        </form>
+        <div id="resultado" class="hidden"></div>
+
+        <div class="messages-section">
+            <h2>Mensagens Recebidas</h2>
+            <div id="mensagens">
+                <p class="message-item">Nenhuma mensagem recebida.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Comunicação. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function enviarMensagem(event) {
+            event.preventDefault();
+
+            const professor = document.getElementById("professor").value;
+            const mensagem = document.getElementById("mensagem").value.trim();
+            const resultado = document.getElementById("resultado");
+
+            if (!professor || !mensagem) {
+                exibirMensagem(resultado, "Por favor, preencha todos os campos.", "error");
+                return;
+            }
+
+            exibirMensagem(resultado, "Mensagem enviada com sucesso!", "success");
+
+            const mensagens = document.getElementById("mensagens");
+            const novaMensagem = document.createElement("div");
+            novaMensagem.classList.add("message-item");
+            novaMensagem.innerHTML = `<strong>${professor}:</strong> Resposta à sua mensagem será enviada em breve.`;
+            mensagens.appendChild(novaMensagem);
+
+            document.getElementById("comunicacaoForm").reset();
+        }
+
+        function exibirMensagem(elemento, texto, tipo) {
+            elemento.className = `message ${tipo}`;
+            elemento.innerText = texto;
+            elemento.classList.remove("hidden");
+            setTimeout(() => elemento.classList.add("hidden"), 3000);
+        }
+    </script>
+</body>
+
+</html>

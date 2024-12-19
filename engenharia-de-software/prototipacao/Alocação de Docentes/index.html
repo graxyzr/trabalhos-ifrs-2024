@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alocação de Docentes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header,
+        .footer {
+            background-color: #004d99;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1,
+        .footer p {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #004d99;
+        }
+
+        .btn {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #004d99;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #003366;
+        }
+
+        .btn-secondary {
+            background-color: #888;
+        }
+
+        .btn-secondary:hover {
+            background-color: #555;
+        }
+
+        .docente-list {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .docente-list th,
+        .docente-list td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .docente-list th {
+            background-color: #004d99;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Sistema de Alocação de Docentes</h1>
+    </header>
+
+    <div class="container">
+        <h2>Lista de Alocações de Docentes</h2>
+        <table class="docente-list">
+            <thead>
+                <tr>
+                    <th>Docente</th>
+                    <th>Curso</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>João da Silva</td>
+                    <td>Introdução à Programação</td>
+                    <td>Confirmado</td>
+                    <td>
+                        <button class="btn" onclick="editarAlocacao('João da Silva')">Editar</button>
+                        <button class="btn" onclick="confirmarAlocacao('João da Silva')">Confirmar</button>
+                        <button class="btn-secondary" onclick="removerAlocacao('João da Silva')">Remover</button>
+                    </td>
+                </tr>
+                <!-- Mais linhas de exemplo -->
+            </tbody>
+        </table>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <button class="btn" onclick="adicionarDocente()">Adicionar Novo Docente</button>
+        </div>
+
+        <!-- Formulário Modal -->
+        <div id="form-modal" class="hidden">
+            <div id="form-content">
+                <h3 id="form-title">Formulário</h3>
+                <div class="form-group">
+                    <label for="form-input">Detalhes</label>
+                    <textarea id="form-input" rows="4" placeholder="Insira as informações aqui..."></textarea>
+                </div>
+                <button class="btn" onclick="salvarFormulario()">Salvar</button>
+                <button class="btn-secondary" onclick="fecharFormulario()">Cancelar</button>
+            </div>
+        </div>
+
+        <div id="resultado" class="message hidden"></div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Alocação de Docentes - Coordenador de Curso</p>
+    </footer>
+
+    <script>
+        function editarAlocacao(docente) {
+            exibirFormulario(`Editar Alocação para ${docente}`);
+        }
+
+        function confirmarAlocacao(docente) {
+            exibirMensagem(document.getElementById('resultado'), `${docente} teve sua alocação confirmada.`, "success");
+        }
+
+        function removerAlocacao(docente) {
+            exibirMensagem(document.getElementById('resultado'), `${docente} foi removido da alocação.`, "error");
+        }
+
+        function adicionarDocente() {
+            exibirFormulario("Adicionar Novo Docente");
+        }
+
+        function exibirFormulario(titulo) {
+            document.getElementById('form-title').innerText = titulo;
+            document.getElementById('form-modal').classList.remove('hidden');
+        }
+
+        function fecharFormulario() {
+            document.getElementById('form-modal').classList.add('hidden');
+            document.getElementById('form-input').value = '';
+        }
+
+        function salvarFormulario() {
+            const resultado = document.getElementById('resultado');
+            exibirMensagem(resultado, "Ação realizada com sucesso!", "success");
+            fecharFormulario();
+        }
+
+        function exibirMensagem(elemento, texto, tipo) {
+            elemento.className = `message ${tipo}`;
+            elemento.innerText = texto;
+            elemento.classList.remove('hidden');
+            setTimeout(() => elemento.classList.add('hidden'), 3000);
+        }
+    </script>
+</body>
+
+</html>

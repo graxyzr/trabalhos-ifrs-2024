@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Matrícula e Rematrícula</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        button,
+        input[type="submit"] {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background-color: #1a598d;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Sistema de Matrícula e Rematrícula</h1>
+    </header>
+
+    <main>
+        <!-- Navegação -->
+        <nav>
+            <a href="#receber-cpf">Receber CPF</a>
+            <a href="#verificar-documentacao">Verificar Documentação</a>
+            <a href="#validar-documentacao">Validar Documentação</a>
+            <a href="#atualizar-status">Atualizar Status</a>
+            <a href="#emitir-certificado">Emitir Certificado</a>
+        </nav>
+
+        <!-- Seção: Receber CPF -->
+        <section id="receber-cpf" class="card">
+            <h2>Receber CPF</h2>
+            <form action="/receber-cpf" method="POST">
+                <label for="cpf">CPF do Aluno:</label>
+                <input type="text" id="cpf" name="cpf" placeholder="Digite o CPF do aluno" required>
+                <input type="submit" value="Iniciar Processo">
+            </form>
+        </section>
+
+        <!-- Seção: Verificar Documentação -->
+        <section id="verificar-documentacao" class="card">
+            <h2>Verificar Documentação</h2>
+            <p>Revise a documentação submetida pelos alunos para garantir que está completa e correta.</p>
+            <button>Verificar Documentação</button>
+        </section>
+
+        <!-- Seção: Validar Documentação -->
+        <section id="validar-documentacao" class="card">
+            <h2>Validar Documentação</h2>
+            <form action="/validar-documentacao" method="POST">
+                <label for="documentacao">Documentação do Aluno:</label>
+                <textarea id="documentacao" name="documentacao" rows="5"
+                    placeholder="Insira observações sobre a validação da documentação"></textarea>
+                <input type="submit" value="Validar Documentação">
+            </form>
+        </section>
+
+        <!-- Seção: Atualizar Status -->
+        <section id="atualizar-status" class="card">
+            <h2>Atualizar Status de Matrícula</h2>
+            <form action="/atualizar-status" method="POST">
+                <label for="status">Novo Status:</label>
+                <select id="status" name="status" required>
+                    <option value="matriculado">Matriculado</option>
+                    <option value="rematriculado">Rematriculado</option>
+                </select>
+                <input type="submit" value="Atualizar Status">
+            </form>
+        </section>
+
+        <!-- Seção: Emitir Certificado -->
+        <section id="emitir-certificado" class="card">
+            <h2>Emitir Certificado de Matrícula</h2>
+            <p>Gere o certificado de matrícula para o aluno após atualizar o status.</p>
+            <button>Emitir Certificado</button>
+            <button>Salvar Certificado</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sistema de Matrícula e Rematrícula</p>
+    </footer>
+
+</body>
+
+</html>

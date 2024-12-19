@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejamento Acadêmico - Direção</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .dashboard {
+            margin-top: 2em;
+            text-align: center;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .form-container {
+            display: none;
+            margin-top: 2em;
+            padding: 2em;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container input,
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #007bff;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Planejamento Acadêmico</h1>
+            <p>Gerencie o calendário acadêmico e horários de aulas facilmente.</p>
+        </header>
+
+        <main>
+            <section class="dashboard">
+                <h2>Escolha uma ação</h2>
+                <button id="btn-create-calendar">Criar Calendário Acadêmico</button>
+                <button id="btn-create-schedule">Criar Horário de Aulas</button>
+                <button id="btn-approve">Aprovar Calendários e Horários</button>
+            </section>
+
+            <section class="form-container" id="form-create-calendar">
+                <h2>Criar Calendário Acadêmico</h2>
+                <form id="calendar-form">
+                    <input type="text" id="calendar-name" placeholder="Nome do Calendário" required>
+                    <input type="date" id="start-date" placeholder="Data de Início" required>
+                    <input type="date" id="end-date" placeholder="Data de Fim" required>
+                    <textarea id="calendar-events" placeholder="Eventos Importantes (Ex: feriados, eventos)"></textarea>
+                    <button type="submit">Salvar Calendário</button>
+                </form>
+                <div class="status" id="calendar-status"></div>
+            </section>
+
+            <section class="form-container" id="form-create-schedule">
+                <h2>Criar Horário de Aulas</h2>
+                <form id="schedule-form">
+                    <input type="text" id="course-name" placeholder="Nome do Curso" required>
+                    <input type="text" id="teacher-name" placeholder="Nome do Professor" required>
+                    <input type="time" id="start-time" placeholder="Horário de Início" required>
+                    <input type="time" id="end-time" placeholder="Horário de Fim" required>
+                    <button type="submit">Salvar Horário</button>
+                </form>
+                <div class="status" id="schedule-status"></div>
+            </section>
+
+            <section class="form-container" id="form-approve">
+                <h2>Aprovar Calendários e Horários</h2>
+                <div class="status" id="approve-status">Aguardando aprovação...</div>
+                <button id="btn-approve-action">Aprovar</button>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const btnCreateCalendar = document.getElementById("btn-create-calendar");
+        const btnCreateSchedule = document.getElementById("btn-create-schedule");
+        const btnApprove = document.getElementById("btn-approve");
+
+        const formCreateCalendar = document.getElementById("form-create-calendar");
+        const formCreateSchedule = document.getElementById("form-create-schedule");
+        const formApprove = document.getElementById("form-approve");
+
+        const calendarForm = document.getElementById("calendar-form");
+        const scheduleForm = document.getElementById("schedule-form");
+
+        const calendarStatus = document.getElementById("calendar-status");
+        const scheduleStatus = document.getElementById("schedule-status");
+        const approveStatus = document.getElementById("approve-status");
+
+        // Função para mostrar formulário de criação de calendário
+        btnCreateCalendar.addEventListener("click", () => {
+            formCreateCalendar.style.display = "block";
+            formCreateSchedule.style.display = "none";
+            formApprove.style.display = "none";
+        });
+
+        // Função para mostrar formulário de criação de horário
+        btnCreateSchedule.addEventListener("click", () => {
+            formCreateCalendar.style.display = "none";
+            formCreateSchedule.style.display = "block";
+            formApprove.style.display = "none";
+        });
+
+        // Função para mostrar tela de aprovação
+        btnApprove.addEventListener("click", () => {
+            formCreateCalendar.style.display = "none";
+            formCreateSchedule.style.display = "none";
+            formApprove.style.display = "block";
+        });
+
+        // Ação de salvar o calendário
+        calendarForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const name = document.getElementById("calendar-name").value;
+            const startDate = document.getElementById("start-date").value;
+            const endDate = document.getElementById("end-date").value;
+            const events = document.getElementById("calendar-events").value;
+
+            if (name && startDate && endDate) {
+                calendarStatus.textContent = `Calendário "${name}" criado com sucesso! De ${startDate} a ${endDate}.`;
+                calendarForm.reset();
+            } else {
+                calendarStatus.textContent = "Por favor, preencha todos os campos obrigatórios.";
+            }
+        });
+
+        // Ação de salvar o horário
+        scheduleForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const courseName = document.getElementById("course-name").value;
+            const teacherName = document.getElementById("teacher-name").value;
+            const startTime = document.getElementById("start-time").value;
+            const endTime = document.getElementById("end-time").value;
+
+            if (courseName && teacherName && startTime && endTime) {
+                scheduleStatus.textContent = `Horário para o curso "${courseName}" com o professor ${teacherName} agendado de ${startTime} a ${endTime}.`;
+                scheduleForm.reset();
+            } else {
+                scheduleStatus.textContent = "Por favor, preencha todos os campos obrigatórios.";
+            }
+        });
+
+        // Ação de aprovar
+        document.getElementById("btn-approve-action").addEventListener("click", () => {
+            approveStatus.textContent = "Calendário e horários aprovados!";
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Turmas e Disciplinas - Coordenador</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #45a049;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .management {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        button {
+            background-color: #45a049;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Gerenciamento de Turmas e Disciplinas - Coordenador</h1>
+    </header>
+    <main>
+        <div class="management">
+            <h2>Criar Turma</h2>
+            <form id="createForm">
+                <label for="novaTurma">Nome da Turma:</label>
+                <input type="text" id="novaTurma" name="novaTurma" required>
+                <label for="novaDisciplina">Nome da Disciplina:</label>
+                <input type="text" id="novaDisciplina" name="novaDisciplina" required>
+                <label for="professor">Professor:</label>
+                <select id="professor" name="professor" required>
+                    <option value="professor1">Professor 1</option>
+                    <option value="professor2">Professor 2</option>
+                    <option value="professor3">Professor 3</option>
+                </select>
+                <button type="submit">Criar Turma</button>
+            </form>
+            <hr>
+            <h2>Editar Turma</h2>
+            <form id="editForm">
+                <label for="editarTurma">Turma:</label>
+                <input type="text" id="editarTurma" name="editarTurma" required>
+                <label for="editarDisciplina">Disciplina:</label>
+                <input type="text" id="editarDisciplina" name="editarDisciplina" required>
+                <label for="novoProfessor">Novo Professor:</label>
+                <select id="novoProfessor" name="novoProfessor" required>
+                    <option value="professor1">Professor 1</option>
+                    <option value="professor2">Professor 2</option>
+                    <option value="professor3">Professor 3</option>
+                </select>
+                <button type="submit">Editar Turma</button>
+            </form>
+            <hr>
+            <h2>Excluir Turma</h2>
+            <form id="deleteForm">
+                <label for="excluirTurma">Turma:</label>
+                <input type="text" id="excluirTurma" name="excluirTurma" required>
+                <button type="submit">Excluir Turma</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alocação de Docentes - Coordenador</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #45a049;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .allocation {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        button {
+            background-color: #45a049;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Alocação de Docentes - Coordenador</h1>
+    </header>
+    <main>
+        <div class="allocation">
+            <h2>Atribuir Professor a Disciplina</h2>
+            <form id="allocationForm">
+                <label for="disciplina">Disciplina:</label>
+                <input type="text" id="disciplina" name="disciplina" required>
+                <label for="professor">Professor:</label>
+                <select id="professor" name="professor" required>
+                    <option value="professor1">Professor 1</option>
+                    <option value="professor2">Professor 2</option>
+                    <option value="professor3">Professor 3</option>
+                </select>
+                <button type="submit">Atribuir Professor</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

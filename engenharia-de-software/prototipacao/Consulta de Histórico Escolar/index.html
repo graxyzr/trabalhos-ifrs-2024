@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Histórico Escolar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header,
+        .footer {
+            background-color: #2E7D32;
+            /* Cor verde dos arquivos anteriores */
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1,
+        .footer p {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group select,
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group button {
+            background-color: #2E7D32;
+            /* Cor verde dos arquivos anteriores */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #1B5E20;
+            /* Cor verde mais escura para o hover */
+        }
+
+        .message {
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+
+        .historico-section {
+            margin-top: 20px;
+        }
+
+        .historico-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Consulta de Histórico Escolar</h1>
+    </header>
+
+    <div class="container">
+        <h2>Consulte seu Histórico Escolar</h2>
+        <form id="consultaHistoricoForm" onsubmit="consultarHistorico(event)">
+            <div class="form-group">
+                <label for="periodo">Selecione o Período Letivo:</label>
+                <select id="periodo" required>
+                    <option value="">Selecione</option>
+                    <option value="2023-2">2023 - 2º Semestre</option>
+                    <option value="2024-1">2024 - 1º Semestre</option>
+                    <option value="2024-2">2024 - 2º Semestre</option>
+                </select>
+            </div>
+            <button type="submit">Consultar</button>
+        </form>
+
+        <div id="resultado" class="hidden"></div>
+
+        <div class="historico-section">
+            <h2>Histórico Escolar</h2>
+            <div id="historico">
+                <p class="historico-item">Nenhum histórico disponível.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Consulta de Histórico Escolar. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function consultarHistorico(event) {
+            event.preventDefault();
+
+            const periodo = document.getElementById("periodo").value;
+            const resultado = document.getElementById("resultado");
+
+            if (!periodo) {
+                exibirMensagem(resultado, "Por favor, selecione um período letivo.", "error");
+                return;
+            }
+
+            exibirMensagem(resultado, "Histórico escolar consultado com sucesso!", "success");
+
+            const historico = document.getElementById("historico");
+            historico.innerHTML = `
+                <div class="historico-item">
+                    <strong>Período:</strong> ${periodo}<br>
+                    <strong>Aluno:</strong> João da Silva<br>
+                    <strong>Curso:</strong> Ciência da Computação<br>
+                    <strong>Disciplina:</strong> Algoritmos e Estruturas de Dados<br>
+                    <strong>Nota:</strong> 8.5<br>
+                </div>
+                <div class="historico-item">
+                    <strong>Período:</strong> ${periodo}<br>
+                    <strong>Aluno:</strong> João da Silva<br>
+                    <strong>Curso:</strong> Ciência da Computação<br>
+                    <strong>Disciplina:</strong> Banco de Dados<br>
+                    <strong>Nota:</strong> 9.0<br>
+                </div>
+            `;
+        }
+
+        function exibirMensagem(elemento, texto, tipo) {
+            elemento.className = `message ${tipo}`;
+            elemento.innerText = texto;
+            elemento.classList.remove("hidden");
+            setTimeout(() => elemento.classList.add("hidden"), 3000);
+        }
+    </script>
+</body>
+
+</html>

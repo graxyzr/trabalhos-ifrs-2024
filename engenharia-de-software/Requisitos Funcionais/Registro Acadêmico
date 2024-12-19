@@ -1,0 +1,41 @@
+1. Acesso ao Sistema:
+RF01: O pessoal do registro acadêmico deve poder se autenticar no sistema usando seu ID de usuário e senha.
+RF02: Deve ser possível recuperar ou redefinir a senha caso a esqueçam.
+
+
+2. Gestão de Alunos:
+RF03: O registro acadêmico deve poder cadastrar novos alunos e atualizar informações dos alunos existentes.
+RF04: Deve ser possível gerenciar o status acadêmico dos alunos (ativo, trancado, desistente, concluído).
+
+
+3. Matrículas:
+RF05: O pessoal do registro acadêmico deve poder inscrever alunos em disciplinas conforme solicitações e pré-requisitos.
+RF06: Deve ser possível processar a renovação semestral de matrículas para os alunos.
+
+
+4. Histórico Acadêmico e Documentos:
+RF07: O registro acadêmico deve poder gerar históricos acadêmicos, certificados, e outros documentos oficiais para os alunos.
+RF08: Deve ser possível emitir declarações de matrícula e comprovantes de conclusão de curso.
+
+
+5. Gestão de Currículos e Disciplinas:
+RF09: O registro deve ter a capacidade de cadastrar novas disciplinas no sistema e atualizar currículos conforme necessário.
+RF10: Deve ser possível registrar e administrar grade curricular, pré-requisitos, e carga horária das disciplinas.
+
+
+6. Gestão de Calendário Acadêmico:
+RF11: O registro acadêmico deve poder criar e manter o calendário acadêmico, incluindo períodos letivos, datas de exames e feriados.
+
+
+7. Atendimento a Solicitações:
+RF12: O sistema deve permitir ao registro acadêmico processar solicitações dos alunos e professores, incluindo trancamentos de matrícula, requisitos para participação em atividades especiais, entre outras.
+RF13: Deve ser possível gerenciar dispensas, aproveitamentos de estudos, e alterações no regime de matrícula.
+
+
+8. Relatórios e Auditorias:
+RF14: O registro acadêmico deve ser capaz de gerar relatórios variados sobre o corpo discente, andamento das matrículas, e dados estatísticos para fins de auditoria interna e externa.
+RF15: Deve ser possível conduzir auditorias sobre a correção da gestão acadêmica e aderência às normas educacionais.
+
+
+9. Interoperabilidade e Integrações:
+RF16: O sistema deve garantir a integração com outros sistemas da instituição como biblioteca, financeiro e recursos humanos para a sincronização de dados acadêmicos e pessoais dos estudantes.

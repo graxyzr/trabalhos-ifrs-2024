@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Notas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 1.5em 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .dashboard,
+        .grade-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .grade-container {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        input[type="number"] {
+            width: 70px;
+            padding: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Registro de Notas</h1>
+        <p>Registre e gerencie as notas dos alunos</p>
+    </header>
+    <div class="container">
+        <!-- Menu Principal -->
+        <div class="dashboard">
+            <h2>Escolha uma disciplina</h2>
+            <div id="disciplinas">
+                <!-- Disciplinas serão listadas aqui -->
+            </div>
+        </div>
+
+        <!-- Registro de Notas -->
+        <div class="grade-container" id="grade-container">
+            <h2>Registro de Notas</h2>
+            <table id="grades-table">
+                <thead>
+                    <tr>
+                        <th>Nome do Aluno</th>
+                        <th>Nota</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Alunos serão listados aqui -->
+                </tbody>
+            </table>
+            <button id="btn-salvar-notas">Salvar Notas</button>
+        </div>
+    </div>
+
+    <script>
+        // Dados simulados de disciplinas e alunos
+        const disciplinas = [
+            { id: 1, nome: "Matemática" },
+            { id: 2, nome: "Física" }
+        ];
+        const alunos = [
+            { id: 1, nome: "Ana", nota: "" },
+            { id: 2, nome: "Bruno", nota: "" },
+            { id: 3, nome: "Carla", nota: "" }
+        ];
+
+        // Referências ao DOM
+        const disciplinasDiv = document.getElementById("disciplinas");
+        const gradeContainer = document.getElementById("grade-container");
+        const gradesTableBody = document.querySelector("#grades-table tbody");
+        const btnSalvarNotas = document.getElementById("btn-salvar-notas");
+
+        // Exibir disciplinas
+        disciplinasDiv.innerHTML = disciplinas.map(disciplina => `
+            <button class="btn-disciplina" data-id="${disciplina.id}">${disciplina.nome}</button>
+        `).join("");
+
+        // Registrar notas para uma disciplina
+        disciplinasDiv.addEventListener("click", (e) => {
+            if (e.target.classList.contains("btn-disciplina")) {
+                carregarTabelaNotas();
+                gradeContainer.style.display = "block";
+            }
+        });
+
+        // Carregar tabela de notas
+        function carregarTabelaNotas() {
+            gradesTableBody.innerHTML = alunos.map(aluno => `
+                <tr>
+                    <td>${aluno.nome}</td>
+                    <td><input type="number" id="nota-${aluno.id}" value="${aluno.nota}" min="0" max="10" step="0.1"></td>
+                    <td>
+                        <button class="btn-alterar" data-id="${aluno.id}">Alterar Nota</button>
+                    </td>
+                </tr>
+            `).join("");
+        }
+
+        // Alterar nota de um aluno
+        gradesTableBody.addEventListener("click", (e) => {
+            if (e.target.classList.contains("btn-alterar")) {
+                const alunoId = e.target.dataset.id;
+                const novaNota = document.getElementById(`nota-${alunoId}`).value;
+
+                if (novaNota >= 0 && novaNota <= 10) {
+                    alunos.find(aluno => aluno.id == alunoId).nota = novaNota;
+                    alert(`Nota de ${alunos.find(aluno => aluno.id == alunoId).nome} alterada para ${novaNota}`);
+                } else {
+                    alert("Nota inválida! Insira um valor entre 0 e 10.");
+                }
+            }
+        });
+
+        // Salvar notas
+        btnSalvarNotas.addEventListener("click", () => {
+            alunos.forEach(aluno => {
+                const nota = document.getElementById(`nota-${aluno.id}`).value;
+                if (nota >= 0 && nota <= 10) {
+                    aluno.nota = nota;
+                } else {
+                    alert(`Erro ao salvar nota de ${aluno.nome}. Insira um valor entre 0 e 10.`);
+                    return;
+                }
+            });
+            alert("Notas registradas com sucesso!");
+        });
+    </script>
+</body>
+
+</html>

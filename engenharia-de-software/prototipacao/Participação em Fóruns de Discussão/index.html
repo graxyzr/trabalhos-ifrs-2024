@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participação em Fóruns de Discussão</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header,
+        .footer {
+            background-color: #2E7D32;
+            /* Cor verde dos arquivos anteriores */
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1,
+        .footer p {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select,
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group button {
+            background-color: #2E7D32;
+            /* Cor verde dos arquivos anteriores */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #1B5E20;
+            /* Cor verde mais escura para o hover */
+        }
+
+        .message {
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+
+        .forum-posts {
+            margin-top: 20px;
+        }
+
+        .forum-post {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .forum-post h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #2E7D32;
+        }
+
+        .forum-post p {
+            margin: 5px 0;
+        }
+
+        .forum-post .response {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e8f5e9;
+            border: 1px solid #b9f6ca;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Participação em Fóruns de Discussão</h1>
+    </header>
+
+    <div class="container">
+        <h2>Participe do Fórum</h2>
+        <form id="forumForm" onsubmit="postarMensagem(event)">
+            <div class="form-group">
+                <label for="forumSelect">Selecione o Fórum:</label>
+                <select id="forumSelect" required>
+                    <option value="">Selecione</option>
+                    <option value="forum1">Fórum de Algoritmos</option>
+                    <option value="forum2">Fórum de Banco de Dados</option>
+                    <option value="forum3">Fórum de Redes de Computadores</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="mensagem">Postar Mensagem:</label>
+                <textarea id="mensagem" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Selecione a Categoria:</label>
+                <select id="categoria" required>
+                    <option value="">Selecione</option>
+                    <option value="duvida">Dúvida</option>
+                    <option value="discussao">Discussão</option>
+                    <option value="sugestao">Sugestão</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Enviar Mensagem</button>
+            </div>
+        </form>
+
+        <div id="resultado" class="hidden"></div>
+
+        <div class="forum-posts" id="forumPosts">
+            <h2>Postagens Recentes</h2>
+            <div class="forum-post">
+                <h3>Fórum de Algoritmos - Dúvida</h3>
+                <p><strong>Postado por:</strong> João da Silva</p>
+                <p>Como posso entender melhor a estrutura de listas encadeadas?</p>
+                <div class="response">
+                    <p><strong>Resposta:</strong> Você pode estudar mais sobre o conceito de memória dinâmica e como as
+                        listas são implementadas. Uma boa referência é o livro "Algoritmos" de Robert Sedgewick.</p>
+                </div>
+            </div>
+            <div class="forum-post">
+                <h3>Fórum de Banco de Dados - Discussão</h3>
+                <p><strong>Postado por:</strong> Maria Oliveira</p>
+                <p>Quais são as principais diferenças entre bancos de dados relacionais e não-relacionais?</p>
+                <div class="response">
+                    <p><strong>Resposta:</strong> Bancos de dados relacionais utilizam tabelas e SQL para interagir,
+                        enquanto bancos não-relacionais utilizam outros formatos, como documentos JSON, para armazenar
+                        dados.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Participação em Fóruns de Discussão. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function postarMensagem(event) {
+            event.preventDefault();
+
+            const forumSelect = document.getElementById("forumSelect").value;
+            const mensagem = document.getElementById("mensagem").value;
+            const categoria = document.getElementById("categoria").value;
+            const resultado = document.getElementById("resultado");
+
+            if (!forumSelect || !mensagem || !categoria) {
+                exibirMensagem(resultado, "Por favor, preencha todos os campos.", "error");
+                return;
+            }
+
+            exibirMensagem(resultado, "Mensagem enviada com sucesso!", "success");
+
+            const forumPosts = document.getElementById("forumPosts");
+            forumPosts.innerHTML += `
+                <div class="forum-post">
+                    <h3>Fórum de ${forumSelect.charAt(0).toUpperCase() + forumSelect.slice(1)} - ${categoria.charAt(0).toUpperCase() + categoria.slice(1)}</h3>
+                    <p><strong>Postado por:</strong> Você</p>
+                    <p>${mensagem}</p>
+                </div>
+            `;
+        }
+
+        function exibirMensagem(elemento, texto, tipo) {
+            elemento.className = `message ${tipo}`;
+            elemento.innerText = texto;
+            elemento.classList.remove("hidden");
+            setTimeout(() => elemento.classList.add("hidden"), 3000);
+        }
+    </script>
+</body>
+
+</html>

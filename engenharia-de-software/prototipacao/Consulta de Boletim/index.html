@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Boletim</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header,
+        .footer {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #005f8a;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #0077b6;
+            background-color: #e1f4ff;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: #a94442;
+            background-color: #f2dede;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ebccd1;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Sistema de Consulta de Boletim Escolar</h1>
+    </header>
+
+    <div class="container">
+        <h2>Consultar Boletim</h2>
+        <form id="boletimForm" onsubmit="consultarBoletim(event)">
+            <div class="form-group">
+                <label for="username">Nome de Usuário:</label>
+                <input type="text" id="username" placeholder="Digite seu nome de usuário" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" placeholder="Digite sua senha" required>
+            </div>
+
+            <div class="form-group">
+                <label for="periodo">Selecione o Período Letivo:</label>
+                <select id="periodo" required>
+                    <option value="">Escolha um período</option>
+                    <option value="2024/1">2024/1</option>
+                    <option value="2024/2">2024/2</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Consultar</button>
+            </div>
+        </form>
+
+        <div id="resultado" class="hidden"></div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Consulta de Boletim Escolar. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function consultarBoletim(event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const periodo = document.getElementById("periodo").value;
+            const resultado = document.getElementById("resultado");
+
+            if (!username || !password || !periodo) {
+                resultado.className = "error";
+                resultado.textContent = "Por favor, preencha todos os campos.";
+                resultado.style.display = "block";
+                return;
+            }
+
+            resultado.className = "result";
+            resultado.innerHTML = `
+                <p><strong>Boletim do Aluno</strong></p>
+                <p>Nome: ${username}</p>
+                <p>Período Letivo: ${periodo}</p>
+                <table border="1" style="width:100%; text-align:center; margin-top:10px;">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Nota</th>
+                            <th>Frequência</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Matemática</td>
+                            <td>8.5</td>
+                            <td>95%</td>
+                        </tr>
+                        <tr>
+                            <td>História</td>
+                            <td>7.0</td>
+                            <td>90%</td>
+                        </tr>
+                        <tr>
+                            <td>Física</td>
+                            <td>9.0</td>
+                            <td>98%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button onclick="baixarBoletim()">Baixar Boletim</button>
+                <button onclick="imprimirBoletim()">Imprimir</button>
+            `;
+            resultado.style.display = "block";
+        }
+
+        function baixarBoletim() {
+            alert("O boletim será baixado em breve!");
+        }
+
+        function imprimirBoletim() {
+            alert("A funcionalidade de impressão foi acionada.");
+        }
+    </script>
+</body>
+
+</html>

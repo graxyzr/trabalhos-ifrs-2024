@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte Técnico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 1.5em 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .dashboard,
+        .support-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .support-container {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #0073e6;
+            color: white;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Suporte Técnico</h1>
+        <p>Gerencie seus chamados técnicos de forma prática</p>
+    </header>
+    <div class="container">
+        <!-- Menu Principal -->
+        <div class="dashboard">
+            <h2>Bem-vindo ao Suporte Técnico</h2>
+            <button id="btn-abrir-chamado">Abrir Novo Chamado</button>
+            <button id="btn-meus-chamados">Meus Chamados</button>
+        </div>
+
+        <!-- Abrir Chamado -->
+        <div class="support-container" id="abrir-chamado-container">
+            <h2>Abrir Novo Chamado</h2>
+            <div class="form-group">
+                <label for="descricao">Descrição do Problema</label>
+                <textarea id="descricao" rows="4" placeholder="Descreva o problema"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="urgencia">Urgência</label>
+                <select id="urgencia">
+                    <option value="baixa">Baixa</option>
+                    <option value="media">Média</option>
+                    <option value="alta">Alta</option>
+                </select>
+            </div>
+            <button id="btn-enviar-chamado">Enviar</button>
+        </div>
+
+        <!-- Meus Chamados -->
+        <div class="support-container" id="meus-chamados-container">
+            <h2>Meus Chamados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descrição</th>
+                        <th>Urgência</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="chamados-tabela">
+                    <!-- Chamados serão listados aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const btnAbrirChamado = document.getElementById("btn-abrir-chamado");
+        const btnMeusChamados = document.getElementById("btn-meus-chamados");
+        const abrirChamadoContainer = document.getElementById("abrir-chamado-container");
+        const meusChamadosContainer = document.getElementById("meus-chamados-container");
+        const btnEnviarChamado = document.getElementById("btn-enviar-chamado");
+        const chamadosTabela = document.getElementById("chamados-tabela");
+
+        // Dados simulados de chamados
+        const chamados = [];
+
+        // Alternar entre seções
+        btnAbrirChamado.addEventListener("click", () => {
+            abrirChamadoContainer.style.display = "block";
+            meusChamadosContainer.style.display = "none";
+        });
+
+        btnMeusChamados.addEventListener("click", () => {
+            abrirChamadoContainer.style.display = "none";
+            meusChamadosContainer.style.display = "block";
+            carregarChamados();
+        });
+
+        // Abrir novo chamado
+        btnEnviarChamado.addEventListener("click", () => {
+            const descricao = document.getElementById("descricao").value;
+            const urgencia = document.getElementById("urgencia").value;
+
+            if (descricao.trim() === "") {
+                alert("Por favor, insira a descrição do problema.");
+                return;
+            }
+
+            const novoChamado = {
+                id: chamados.length + 1,
+                descricao,
+                urgencia,
+                status: "Pendente"
+            };
+
+            chamados.push(novoChamado);
+            alert("Chamado registrado com sucesso!");
+            document.getElementById("descricao").value = "";
+            document.getElementById("urgencia").value = "baixa";
+        });
+
+        // Carregar chamados na tabela
+        function carregarChamados() {
+            chamadosTabela.innerHTML = chamados.map(chamado => `
+                <tr>
+                    <td>${chamado.id}</td>
+                    <td>${chamado.descricao}</td>
+                    <td>${chamado.urgencia.charAt(0).toUpperCase() + chamado.urgencia.slice(1)}</td>
+                    <td>${chamado.status}</td>
+                    <td class="actions">
+                        <button onclick="atualizarChamado(${chamado.id})">Atualizar</button>
+                        <button onclick="fecharChamado(${chamado.id})">Fechar</button>
+                    </td>
+                </tr>
+            `).join("");
+        }
+
+        // Atualizar chamado
+        function atualizarChamado(id) {
+            const chamado = chamados.find(chamado => chamado.id === id);
+            const novaDescricao = prompt("Atualize a descrição:", chamado.descricao);
+            if (novaDescricao !== null) chamado.descricao = novaDescricao;
+            carregarChamados();
+        }
+
+        // Fechar chamado
+        function fecharChamado(id) {
+            const chamado = chamados.find(chamado => chamado.id === id);
+            chamado.status = "Resolvido";
+            carregarChamados();
+        }
+    </script>
+</body>
+
+</html>

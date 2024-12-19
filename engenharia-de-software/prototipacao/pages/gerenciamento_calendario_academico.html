@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Calendário Acadêmico - Secretaria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header,
+        .footer {
+            background-color: #4caf50;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1,
+        .footer p {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .calendario {
+            margin-bottom: 20px;
+        }
+
+        .calendario table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .calendario th,
+        .calendario td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .calendario th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .calendario td {
+            font-size: 14px;
+        }
+
+        .form-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Gerenciamento de Calendário Acadêmico - Secretaria</h1>
+    </header>
+
+    <div class="container">
+        <h2>Calendário Acadêmico</h2>
+        <div class="calendario">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Evento</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01/08/2024</td>
+                        <td>Início do Semestre</td>
+                        <td>Início das aulas do semestre 2024.2</td>
+                        <td>
+                            <a href="#" class="btn">Editar</a>
+                            <a href="#" class="btn">Excluir</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10/09/2024</td>
+                        <td>Recesso Acadêmico</td>
+                        <td>Período de recesso para os alunos.</td>
+                        <td>
+                            <a href="#" class="btn">Editar</a>
+                            <a href="#" class="btn">Excluir</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>20/10/2024</td>
+                        <td>Feriado Nacional</td>
+                        <td>Dia nacional do professor.</td>
+                        <td>
+                            <a href="#" class="btn">Editar</a>
+                            <a href="#" class="btn">Excluir</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>15/12/2024</td>
+                        <td>Término do Semestre</td>
+                        <td>Último dia de aulas do semestre 2024.2.</td>
+                        <td>
+                            <a href="#" class="btn">Editar</a>
+                            <a href="#" class="btn">Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <a href="#" class="btn">Adicionar Evento</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 SIGAA Acadêmico. Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>

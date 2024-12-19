@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso a Documentos Institucionais</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header,
+    .footer {
+      background-color: #4caf50;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .header h1,
+    .footer p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .btn {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ccc;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    .document-link {
+      color: #4caf50;
+      text-decoration: none;
+    }
+
+    .document-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <h1>Sistema de Acesso a Documentos Institucionais</h1>
+  </header>
+
+  <div class="container">
+    <h2>Acesso a Documentos Institucionais</h2>
+    <div class="form-group">
+      <label for="tipoDocumento">Tipo de Documento:</label>
+      <select id="tipoDocumento">
+        <option value="todos">Todos</option>
+        <option value="regulamentos">Regulamentos</option>
+        <option value="portarias">Portarias</option>
+        <option value="resolucoes">Resoluções</option>
+        <option value="manuais">Manuais</option>
+        <option value="planos">Planos de Ensino</option>
+      </select>
+    </div>
+
+    <button class="btn" onclick="filtrarDocumentos()">Filtrar Documentos</button>
+
+    <table id="tabelaDocumentos">
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Título</th>
+          <th>Data</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Regulamentos</td>
+          <td>Regulamento de Estágios</td>
+          <td>01/03/2024</td>
+          <td><a href="#" class="document-link">Acessar</a></td>
+        </tr>
+        <tr>
+          <td>Portarias</td>
+          <td>Portaria 123/2024</td>
+          <td>15/04/2024</td>
+          <td><a href="#" class="document-link">Acessar</a></td>
+        </tr>
+        <tr>
+          <td>Resoluções</td>
+          <td>Resolução 456/2024</td>
+          <td>20/05/2024</td>
+          <td><a href="#" class="document-link">Acessar</a></td>
+        </tr>
+        <tr>
+          <td>Manuais</td>
+          <td>Manual de Procedimentos Acadêmicos</td>
+          <td>10/02/2024</td>
+          <td><a href="#" class="document-link">Acessar</a></td>
+        </tr>
+        <tr>
+          <td>Planos de Ensino</td>
+          <td>Plano de Ensino - Curso XYZ</td>
+          <td>30/01/2024</td>
+          <td><a href="#" class="document-link">Acessar</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2024 SIGAA Acadêmico. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    function filtrarDocumentos() {
+      var tipoDocumento = document.getElementById('tipoDocumento').value;
+      var tabela = document.getElementById('tabelaDocumentos').getElementsByTagName('tbody')[0];
+      var linhas = tabela.getElementsByTagName('tr');
+
+      for (var i = 0; i < linhas.length; i++) {
+        var tipo = linhas[i].getElementsByTagName('td')[0].textContent;
+        linhas[i].style.display = '';
+
+        if (tipoDocumento !== 'todos' && tipo !== tipoDocumento) {
+          linhas[i].style.display = 'none';
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

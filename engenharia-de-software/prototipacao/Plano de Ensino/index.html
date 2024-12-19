@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Ensino</title>
+    <style>
+        /* CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        h1,
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        form {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #4CAF50;
+            color: white;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Gestão de Planos de Ensino</h1>
+    </header>
+    <main>
+        <section id="form-section">
+            <h2>Editar Plano de Ensino</h2>
+            <form id="plano-form">
+                <label for="disciplina">Disciplina:</label>
+                <input type="text" id="disciplina" placeholder="Digite o nome da disciplina" required>
+
+                <label for="objetivos">Objetivos:</label>
+                <textarea id="objetivos" placeholder="Digite os objetivos do plano" required></textarea>
+
+                <label for="conteudo">Conteúdos Programáticos:</label>
+                <textarea id="conteudo" placeholder="Digite os conteúdos programáticos" required></textarea>
+
+                <label for="metodologia">Metodologias:</label>
+                <textarea id="metodologia" placeholder="Descreva as metodologias de ensino" required></textarea>
+
+                <button type="submit">Salvar Plano</button>
+            </form>
+        </section>
+
+        <section id="list-section">
+            <h2>Planos de Ensino Existentes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Disciplina</th>
+                        <th>Objetivos</th>
+                        <th>Conteúdos</th>
+                        <th>Metodologia</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="plano-list">
+                    <!-- Planos cadastrados aparecerão aqui -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 - Sistema de Gestão de Planos de Ensino</p>
+    </footer>
+    <script>
+        // JavaScript
+        document.getElementById('plano-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Pega os valores do formulário
+            const disciplina = document.getElementById('disciplina').value;
+            const objetivos = document.getElementById('objetivos').value;
+            const conteudo = document.getElementById('conteudo').value;
+            const metodologia = document.getElementById('metodologia').value;
+
+            // Cria uma nova linha na tabela
+            const planoList = document.getElementById('plano-list');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${disciplina}</td>
+                <td>${objetivos}</td>
+                <td>${conteudo}</td>
+                <td>${metodologia}</td>
+                <td>
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn">Excluir</button>
+                </td>
+            `;
+
+            // Adiciona evento de exclusão
+            newRow.querySelector('.delete-btn').addEventListener('click', function () {
+                planoList.removeChild(newRow);
+            });
+
+            // Adiciona evento de edição
+            newRow.querySelector('.edit-btn').addEventListener('click', function () {
+                document.getElementById('disciplina').value = disciplina;
+                document.getElementById('objetivos').value = objetivos;
+                document.getElementById('conteudo').value = conteudo;
+                document.getElementById('metodologia').value = metodologia;
+                planoList.removeChild(newRow);
+            });
+
+            // Adiciona a nova linha à lista
+            planoList.appendChild(newRow);
+
+            // Limpa os campos do formulário
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

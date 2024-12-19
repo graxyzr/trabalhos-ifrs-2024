@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Acesso ao SIGAA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header,
+        .footer {
+            background-color: #4caf50;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1,
+        .footer p {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .shortcuts {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .shortcuts a {
+            display: block;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .shortcuts a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Controle de Acesso ao SIGAA</h1>
+    </header>
+
+    <div class="container">
+        <h2>Login</h2>
+        <form id="formLogin" action="#" method="post">
+            <div class="form-group">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Selecione seu papel:</label>
+                <select id="role" name="role">
+                    <option value="">Selecione</option>
+                    <option value="direction">Direção</option>
+                    <option value="coordinator">Coordenador de Curso</option>
+                    <option value="pro-rectory">Pró-Reitoria</option>
+                    <option value="academic-registry">Registro Acadêmico</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Entrar</button>
+            </div>
+        </form>
+
+        <div id="atalhosCoordenador" class="shortcuts">
+            <a href="pages/gerenciamento_turmas_disciplinas.html">Gerenciamento de Turmas e Disciplinas</a>
+            <a href="pages/acompanhamento_academico.html">Acompanhamento Acadêmico</a>
+            <a href="pages/alocacao_docentes.html">Alocação de Docentes</a>
+            <a href="pages/geracao_relatorios_academicos.html">Geração de Relatórios Acadêmicos</a>
+            <a href="pages/acompanhamento_desempenho_alunos.html">Acompanhamento do Desempenho dos Alunos</a>
+            <a href="pages/acompanhamento_estagios_tccs.html">Acompanhamento de Estágios e TCCs</a>
+            <a href="pages/acesso_documentos_institucionais.html">Acesso a Documentos Institucionais</a>
+        </div>
+
+        <div id="atalhosDirecao" class="shortcuts">
+            <a href="pages/cadastrar_professores.html">Cadastrar Professores</a>
+            <a href="pages/criacao_de_cursos.html">Criação de Cursos</a>
+            <a href="pages/transferencia_dados_campis.html">Transferência de Dados entre Campi</a>
+        </div>
+
+        <div id="atalhosProReitoria" class="shortcuts">
+            <a href="pages/controle_de_evasao.html">Controle de Evasão</a>
+        </div>
+
+        <div id="atalhosRegistroAcademico" class="shortcuts">
+            <a href="pages/cadastrar_alunos.html">Cadastro de Alunos</a>
+            <a href="pages/abonar_faltas.html">Abonar Faltas</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 SIGAA - Acadêmico. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('formLogin').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var role = document.getElementById('role').value;
+
+            document.querySelectorAll('.shortcuts').forEach(function (element) {
+                element.style.display = 'none';
+            });
+
+            if (role === 'coordinator') {
+                document.getElementById('atalhosCoordenador').style.display = 'block';
+            } else if (role === 'direction') {
+                document.getElementById('atalhosDirecao').style.display = 'block';
+            } else if (role === 'pro-rectory') {
+                document.getElementById('atalhosProReitoria').style.display = 'block';
+            } else if (role === 'academic-registry') {
+                document.getElementById('atalhosRegistroAcademico').style.display = 'block';
+            }
+
+            console.log('Usuário:', document.getElementById('username').value);
+            console.log('Senha:', document.getElementById('password').value);
+            console.log('Papel:', role);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Turmas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .dashboard {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .turmas-container {
+            display: none;
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .turma {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .turma:last-child {
+            border-bottom: none;
+        }
+
+        .turma p {
+            margin: 5px 0;
+        }
+
+        .turma button {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .details-container {
+            display: none;
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Consulta de Turmas</h1>
+        <p>Gerencie suas turmas com facilidade</p>
+    </header>
+    <div class="container">
+        <div class="dashboard">
+            <h2>Escolha uma ação</h2>
+            <button id="btn-ver-turmas">Minhas Turmas</button>
+        </div>
+
+        <div class="turmas-container" id="turmas-container">
+            <h2>Minhas Turmas</h2>
+            <div id="lista-turmas">
+                <!-- Turmas serão inseridas dinamicamente aqui -->
+            </div>
+            <div class="actions">
+                <button id="btn-ver-mais">Verificar Mais Turmas</button>
+            </div>
+        </div>
+
+        <div class="details-container" id="details-container">
+            <h2>Detalhes da Turma</h2>
+            <div id="turma-detalhes">
+                <!-- Detalhes da turma serão exibidos aqui -->
+            </div>
+            <button id="btn-voltar">Voltar para as Turmas</button>
+        </div>
+    </div>
+
+    <script>
+        // Dados simulados de turmas
+        const turmas = [
+            { id: 1, nome: "Turma A - Matemática", horario: "Segunda e Quarta, 10h-12h", local: "Sala 101", alunos: ["Ana", "Carlos", "Bruna"] },
+            { id: 2, nome: "Turma B - Física", horario: "Terça e Quinta, 14h-16h", local: "Sala 202", alunos: ["Daniel", "Fernanda", "Eduardo"] },
+            { id: 3, nome: "Turma C - Química", horario: "Sexta, 8h-10h", local: "Laboratório 3", alunos: ["João", "Mariana", "Paulo"] }
+        ];
+
+        // Referências aos elementos do DOM
+        const btnVerTurmas = document.getElementById("btn-ver-turmas");
+        const turmasContainer = document.getElementById("turmas-container");
+        const listaTurmas = document.getElementById("lista-turmas");
+        const btnVerMais = document.getElementById("btn-ver-mais");
+        const detailsContainer = document.getElementById("details-container");
+        const turmaDetalhes = document.getElementById("turma-detalhes");
+        const btnVoltar = document.getElementById("btn-voltar");
+
+        // Exibir turmas
+        btnVerTurmas.addEventListener("click", () => {
+            listaTurmas.innerHTML = turmas
+                .slice(0, 2) // Exibe apenas as duas primeiras inicialmente
+                .map(turma => `
+                    <div class="turma">
+                        <p><strong>Nome:</strong> ${turma.nome}</p>
+                        <p><strong>Horário:</strong> ${turma.horario}</p>
+                        <button data-id="${turma.id}" class="btn-detalhes">Ver Detalhes</button>
+                    </div>
+                `).join("");
+            turmasContainer.style.display = "block";
+        });
+
+        // Exibir mais turmas
+        btnVerMais.addEventListener("click", () => {
+            listaTurmas.innerHTML = turmas
+                .map(turma => `
+                    <div class="turma">
+                        <p><strong>Nome:</strong> ${turma.nome}</p>
+                        <p><strong>Horário:</strong> ${turma.horario}</p>
+                        <button data-id="${turma.id}" class="btn-detalhes">Ver Detalhes</button>
+                    </div>
+                `).join("");
+        });
+
+        // Exibir detalhes da turma
+        listaTurmas.addEventListener("click", (e) => {
+            if (e.target.classList.contains("btn-detalhes")) {
+                const turmaId = e.target.dataset.id;
+                const turma = turmas.find(t => t.id == turmaId);
+                if (turma) {
+                    turmaDetalhes.innerHTML = `
+                        <p><strong>Nome:</strong> ${turma.nome}</p>
+                        <p><strong>Horário:</strong> ${turma.horario}</p>
+                        <p><strong>Local:</strong> ${turma.local}</p>
+                        <p><strong>Alunos:</strong> ${turma.alunos.join(", ")}</p>
+                    `;
+                    turmasContainer.style.display = "none";
+                    detailsContainer.style.display = "block";
+                }
+            }
+        });
+
+        // Voltar para a lista de turmas
+        btnVoltar.addEventListener("click", () => {
+            detailsContainer.style.display = "none";
+            turmasContainer.style.display = "block";
+        });
+    </script>
+</body>
+
+</html>

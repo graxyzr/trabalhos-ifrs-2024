@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Frequência</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .attendance {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="date"],
+        select {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4caf50;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Registro de Frequência</h1>
+    </header>
+    <main>
+        <div class="attendance">
+            <h2>Registrar Frequência</h2>
+            <form>
+                <label for="aluno">Selecione o Aluno:</label>
+                <select id="aluno" name="aluno">
+                    <option value="aluno1">Aluno 1</option>
+                    <option value="aluno2">Aluno 2</option>
+                    <option value="aluno3">Aluno 3</option>
+                </select>
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" required>
+                <label for="presenca">Presença:</label>
+                <select id="presenca" name="presenca" required>
+                    <option value="presente">Presente</option>
+                    <option value="ausente">Ausente</option>
+                </select>
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

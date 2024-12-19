@@ -1,0 +1,38 @@
+1. Acesso ao Sistema:
+RF01: O coordenador deve poder se autenticar no sistema usando seu ID de usuário e senha.
+RF02: O coordenador deve poder recuperar ou redefinir sua senha caso a esqueça.
+
+
+2. Gerenciamento de Currículo:
+RF03: O coordenador deve ser capaz de revisar e atualizar a estrutura curricular do curso, incluindo adição, remoção, e modificação de disciplinas obrigatórias e eletivas.
+RF04: Deve ser possível definir e atualizar os pré-requisitos das disciplinas.
+
+
+3. Supervisão Acadêmica:
+RF05: O coordenador necessita ter acesso a relatórios de desempenho acadêmico de estudantes, incluindo notas, frequência e progressão acadêmica.
+RF06: Deve ser possível identificar estudantes em risco acadêmico e iniciar protocolos de apoio.
+
+
+4. Alocação de Professores:
+RF07: O coordenador deve poder atribuir professores às disciplinas do curso para o semestre vigente.
+RF08: Deve ser possível visualizar e gerenciar a carga de trabalho docente, incluindo aulas, supervisões e orientações.
+
+
+5. Gestão de Solicitações:
+RF09: O sistema deve permitir ao coordenador gerenciar solicitações dos alunos, como trancamentos, transferências, e aproveitamentos de disciplinas.
+RF10: O coordenador deve poder aprovar ou recusar solicitações de mudanças na matrícula dos alunos.
+
+
+6. Comunicação com Professores e Alunos:
+RF11: O coordenador deve ter acesso a ferramentas de comunicação para enviar anúncios e informações importantes para professores e alunos do curso.
+RF12: Deve ser possível agendar reuniões e eventos do curso.
+
+
+7. Monitoramento e Avaliação do Curso:
+RF13: O coordenador necessita de ferramentas para implementar e analisar pesquisas de satisfação e avaliações do curso realizadas por alunos e professores.
+RF14: Deve ser possível acessar indicadores de qualidade e desempenho do curso para fins de acreditação e melhoria contínua.
+
+
+8. Planejamento e Desenvolvimento:
+RF15: O sistema deve permitir ao coordenador planejar e documentar o desenvolvimento e a implementação de novas iniciativas pedagógicas e curriculares.
+RF16: Deve ser possível colaborar com professores na criação de propostas de novas disciplinas ou programas de estudo.

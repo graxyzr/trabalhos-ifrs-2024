@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Bolsas e Auxílios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 1.5em 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .dashboard {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .section-container {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #0073e6;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Gestão de Bolsas e Auxílios</h1>
+        <p>Gerencie bolsas e auxílios com eficiência</p>
+    </header>
+    <div class="container">
+        <!-- Menu Principal -->
+        <div class="dashboard">
+            <h2>Bem-vindo ao Sistema</h2>
+            <button id="btn-planejar-bolsas">Planejar Bolsas</button>
+            <button id="btn-definir-criterios">Definir Critérios</button>
+            <button id="btn-publicar-edital">Publicar Edital</button>
+            <button id="btn-avaliar-candidaturas">Avaliar Candidaturas</button>
+            <button id="btn-determinar-auxilios">Determinar Auxílios</button>
+            <button id="btn-relatorios">Gerar Relatórios</button>
+        </div>
+
+        <!-- Planejar Bolsas -->
+        <div class="section-container" id="planejar-bolsas-container">
+            <h2>Planejar Disponibilidade de Bolsas</h2>
+            <div class="form-group">
+                <label for="quantidade-bolsas">Quantidade de Bolsas</label>
+                <input type="number" id="quantidade-bolsas" placeholder="Digite a quantidade de bolsas disponíveis">
+            </div>
+            <button id="btn-salvar-bolsas">Salvar</button>
+        </div>
+
+        <!-- Definir Critérios -->
+        <div class="section-container" id="definir-criterios-container">
+            <h2>Definir Critérios de Elegibilidade</h2>
+            <textarea id="criterios" rows="4" placeholder="Descreva os critérios de elegibilidade"></textarea>
+            <button id="btn-salvar-criterios">Salvar</button>
+        </div>
+
+        <!-- Publicar Edital -->
+        <div class="section-container" id="publicar-edital-container">
+            <h2>Publicar Edital</h2>
+            <textarea id="edital-info" rows="6" placeholder="Insira as informações do edital"></textarea>
+            <button id="btn-publicar">Publicar</button>
+        </div>
+
+        <!-- Avaliar Candidaturas -->
+        <div class="section-container" id="avaliar-candidaturas-container">
+            <h2>Avaliar Candidaturas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="candidaturas-tabela">
+                    <!-- Dados simulados -->
+                    <tr>
+                        <td>1</td>
+                        <td>Ana Silva</td>
+                        <td>Pendente</td>
+                        <td>
+                            <button onclick="aprovarCandidatura(1)">Aprovar</button>
+                            <button onclick="rejeitarCandidatura(1)">Rejeitar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Determinar Auxílios -->
+        <div class="section-container" id="determinar-auxilios-container">
+            <h2>Determinar Disponibilidade de Auxílios</h2>
+            <div class="form-group">
+                <label for="tipo-auxilio">Tipo de Auxílio</label>
+                <input type="text" id="tipo-auxilio" placeholder="Ex.: Transporte, Alimentação">
+            </div>
+            <div class="form-group">
+                <label for="quantidade-auxilios">Quantidade</label>
+                <input type="number" id="quantidade-auxilios" placeholder="Digite a quantidade disponível">
+            </div>
+            <button id="btn-salvar-auxilios">Salvar</button>
+        </div>
+
+        <!-- Relatórios -->
+        <div class="section-container" id="relatorios-container">
+            <h2>Gerar Relatórios</h2>
+            <p>Relatórios gerados sobre bolsas, candidatos e auxílios estarão disponíveis aqui.</p>
+        </div>
+    </div>
+
+    <script>
+        const sections = {
+            "planejar-bolsas": document.getElementById("planejar-bolsas-container"),
+            "definir-criterios": document.getElementById("definir-criterios-container"),
+            "publicar-edital": document.getElementById("publicar-edital-container"),
+            "avaliar-candidaturas": document.getElementById("avaliar-candidaturas-container"),
+            "determinar-auxilios": document.getElementById("determinar-auxilios-container"),
+            "relatorios": document.getElementById("relatorios-container")
+        };
+
+        document.querySelectorAll("button[id^='btn-']").forEach(button => {
+            button.addEventListener("click", () => {
+                const target = button.id.split("-")[1];
+                Object.values(sections).forEach(section => section.style.display = "none");
+                sections[target].style.display = "block";
+            });
+        });
+
+        // Simulação de ações
+        function aprovarCandidatura(id) {
+            alert(`Candidatura ${id} aprovada!`);
+        }
+
+        function rejeitarCandidatura(id) {
+            alert(`Candidatura ${id} rejeitada!`);
+        }
+    </script>
+</body>
+
+</html>

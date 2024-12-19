@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trancamento de Curso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Sistema de Trancamento de Curso</h1>
+    </header>
+
+    <main>
+        <!-- Seção de Navegação -->
+        <nav>
+            <a href="#solicitacoes">Receber Solicitações de Trancamento</a>
+            <a href="#documentos">Verificar Documentação</a>
+            <a href="#justificativa">Validar Justificativa</a>
+            <a href="#decisao">Aprovar/Rejeitar Solicitação</a>
+            <a href="#status">Atualizar Status de Matrícula</a>
+            <a href="#notificar">Notificar Aluno</a>
+        </nav>
+
+        <!-- Seção de Receber Solicitações de Trancamento -->
+        <section id="solicitacoes" class="card">
+            <h2>Receber Solicitações de Trancamento</h2>
+            <p>Revise as solicitações de trancamento de curso submetidas pelos alunos.</p>
+            <button>Receber Solicitações</button>
+        </section>
+
+        <!-- Seção de Verificar Documentação -->
+        <section id="documentos" class="card">
+            <h2>Verificar Documentação</h2>
+            <p>Verifique se toda a documentação necessária foi submetida pelos alunos.</p>
+            <button>Verificar Documentação</button>
+        </section>
+
+        <!-- Seção de Validar Justificativa -->
+        <section id="justificativa" class="card">
+            <h2>Validar Justificativa</h2>
+            <p>Valide a justificativa fornecida pelo aluno para o trancamento do curso.</p>
+            <form action="/validar-justificativa" method="POST">
+                <label for="justificativa">Justificativa:</label>
+                <textarea id="justificativa" name="justificativa" required></textarea>
+                <button type="submit">Validar Justificativa</button>
+            </form>
+        </section>
+
+        <!-- Seção de Aprovar/Rejeitar Solicitação -->
+        <section id="decisao" class="card">
+            <h2>Aprovar ou Rejeitar Solicitação</h2>
+            <p>Decida se a solicitação de trancamento será aprovada ou rejeitada.</p>
+            <form action="/aprovar-rejeitar" method="POST">
+                <label for="solicitacao">Selecione a Solicitação:</label>
+                <select id="solicitacao" name="solicitacao" required>
+                    <option value="solicitacao1">Solicitação 1</option>
+                    <option value="solicitacao2">Solicitação 2</option>
+                    <option value="solicitacao3">Solicitação 3</option>
+                </select>
+                <label for="decisao">Decisão:</label>
+                <select id="decisao" name="decisao" required>
+                    <option value="aprovar">Aprovar</option>
+                    <option value="rejeitar">Rejeitar</option>
+                </select>
+                <label for="comentario">Comentários (opcional):</label>
+                <textarea id="comentario" name="comentario"></textarea>
+                <button type="submit">Submeter Decisão</button>
+            </form>
+        </section>
+
+        <!-- Seção de Atualizar Status de Matrícula -->
+        <section id="status" class="card">
+            <h2>Atualizar Status de Matrícula</h2>
+            <p>Após a aprovação, atualize o status de matrícula do aluno para "Trancado".</p>
+            <button>Atualizar Status</button>
+        </section>
+
+        <!-- Seção de Notificar Aluno -->
+        <section id="notificar" class="card">
+            <h2>Notificar Aluno</h2>
+            <p>Envie uma notificação ao aluno sobre a aprovação ou rejeição da solicitação de trancamento.</p>
+            <form action="/gerar-notificacao" method="POST">
+                <label for="solicitacao-notificar">Solicitação:</label>
+                <select id="solicitacao-notificar" name="solicitacao" required>
+                    <option value="solicitacao1">Solicitação 1</option>
+                    <option value="solicitacao2">Solicitação 2</option>
+                    <option value="solicitacao3">Solicitação 3</option>
+                </select>
+                <label for="notificacao">Mensagem:</label>
+                <textarea id="notificacao" name="notificacao" required></textarea>
+                <button type="submit">Gerar Notificação</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sistema de Trancamento de Curso</p>
+    </footer>
+
+</body>
+
+</html>

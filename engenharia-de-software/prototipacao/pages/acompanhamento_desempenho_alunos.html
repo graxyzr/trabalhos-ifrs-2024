@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acompanhamento do Desempenho dos Alunos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header,
+    .footer {
+      background-color: #4caf50;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .header h1,
+    .footer p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group select,
+    .form-group input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .btn {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <h1>Acompanhamento do Desempenho dos Alunos</h1>
+  </header>
+
+  <div class="container">
+    <h2>Filtrar Desempenho dos Alunos</h2>
+    <div class="form-group">
+      <label for="curso">Curso:</label>
+      <select id="curso">
+        <option value="" disabled selected>Selecione um curso</option>
+        <option value="curso1">Curso 1</option>
+        <option value="curso2">Curso 2</option>
+        <option value="curso3">Curso 3</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="disciplina">Disciplina:</label>
+      <select id="disciplina">
+        <option value="" disabled selected>Selecione uma disciplina</option>
+        <option value="disciplina1">Disciplina 1</option>
+        <option value="disciplina2">Disciplina 2</option>
+        <option value="disciplina3">Disciplina 3</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="periodo">Período:</label>
+      <select id="periodo">
+        <option value="" disabled selected>Selecione um período</option>
+        <option value="2023-1">2023/1</option>
+        <option value="2023-2">2023/2</option>
+        <option value="2024-1">2024/1</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="nomeAluno">Nome do Aluno:</label>
+      <input type="text" id="nomeAluno" placeholder="Digite o nome do aluno">
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn" onclick="filtrarDesempenho()">Filtrar</button>
+    </div>
+
+    <h2>Resultados</h2>
+    <table id="tabelaDesempenho">
+      <thead>
+        <tr>
+          <th>Nome do Aluno</th>
+          <th>Curso</th>
+          <th>Disciplina</th>
+          <th>Período</th>
+          <th>Nota</th>
+          <th>Frequência (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Os dados serão preenchidos aqui dinamicamente -->
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2024 SIGAA Acadêmico. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    function filtrarDesempenho() {
+      var curso = document.getElementById('curso').value;
+      var disciplina = document.getElementById('disciplina').value;
+      var periodo = document.getElementById('periodo').value;
+      var nomeAluno = document.getElementById('nomeAluno').value;
+
+      // Simulação de dados filtrados
+      var dadosFiltrados = [
+        { nome: 'Aluno 1', curso: 'Curso 1', disciplina: 'Disciplina 1', periodo: '2023-1', nota: 85, frequencia: 95 },
+        { nome: 'Aluno 2', curso: 'Curso 1', disciplina: 'Disciplina 1', periodo: '2023-1', nota: 78, frequencia: 88 },
+        // Adicione mais dados conforme necessário
+      ];
+
+      var tabela = document.getElementById('tabelaDesempenho').getElementsByTagName('tbody')[0];
+      tabela.innerHTML = '';
+
+      dadosFiltrados.forEach(function (aluno) {
+        var row = tabela.insertRow();
+        row.insertCell(0).textContent = aluno.nome;
+        row.insertCell(1).textContent = aluno.curso;
+        row.insertCell(2).textContent = aluno.disciplina;
+        row.insertCell(3).textContent = aluno.periodo;
+        row.insertCell(4).textContent = aluno.nota;
+        row.insertCell(5).textContent = aluno.frequencia;
+      });
+    }
+  </script>
+</body>
+
+</html>

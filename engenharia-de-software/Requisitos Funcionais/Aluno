@@ -1,0 +1,56 @@
+Acesso ao Sistema:
+
+RF01: O aluno deve poder se autenticar no sistema usando seu ID de usuário e senha.
+RF02: O aluno deve poder recuperar ou redefinir sua senha caso a esqueça.
+
+
+Matrícula em Disciplinas:
+
+RF03: O aluno deve ser capaz de visualizar as disciplinas disponíveis para matrícula.
+RF04: O aluno deve ser capaz de se matricular em disciplinas dentro do limite permitido por seu currículo.
+RF05: O aluno deve poder desistir de disciplinas dentro de um período especificado.
+
+
+Visualização de Grade Curricular:
+
+RF06: O aluno deve poder consultar sua grade curricular, incluindo disciplinas obrigatórias e eletivas.
+RF07: O aluno deve poder visualizar pré-requisitos para cada disciplina.
+
+
+Consulta de Notas e Frequência:
+
+RF08: O aluno deve ser capaz de acessar suas notas e frequência para as disciplinas em que está matriculado.
+RF09: O aluno deve poder visualizar o histórico acadêmico completo, incluindo todas as notas finais.
+
+
+Solicitações Administrativas:
+
+RF10: O aluno deve ser capaz de submeter solicitações administrativas, como trancamento de matrícula, aproveitamento de disciplinas, entre outras.
+
+
+Informações Pessoais:
+
+RF11: O aluno deve ser capaz de visualizar e atualizar suas informações pessoais no sistema (por exemplo, endereço de contato, telefone).
+
+
+Comunicação e Avisos:
+
+RF12: O aluno deve ser capaz de receber avisos e comunicados importantes através do sistema.
+RF13: O aluno deve ter acesso a um sistema de mensagens para comunicação com professores e coordenação.
+
+
+Avaliações e Feedback:
+
+RF14: O aluno deve poder avaliar as disciplinas e professores ao final de cada período letivo.
+RF15: O aluno deve ter acesso a feedbacks dados pelos professores em trabalhos e provas.
+
+
+Material de Aula e Tarefas:
+
+RF16: O aluno deve ter acesso a materiais de aula postados pelos professores.
+RF17: O aluno deve poder submeter tarefas e trabalhos através do sistema.
+
+
+Calendário Acadêmico:
+
+RF18: O aluno deve ter acesso ao calendário acadêmico, incluindo datas de provas, feriados e eventos.

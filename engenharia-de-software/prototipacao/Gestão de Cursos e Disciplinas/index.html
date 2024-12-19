@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão de Cursos e Disciplinas - Direção</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .history {
+            margin-top: 20px;
+        }
+
+        .history table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history th,
+        .history td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .history th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Sistema de Gestão de Cursos e Disciplinas</h1>
+        <p>Direção - Gerenciamento de Cursos e Disciplinas</p>
+    </div>
+
+    <div class="container">
+        <!-- Main Section -->
+        <div class="card">
+            <h3>Gestão de Cursos e Disciplinas</h3>
+            <button onclick="showCreateCourse()">Criar Curso</button>
+            <button onclick="showCreateSubject()">Criar Disciplina</button>
+            <button onclick="showCourseHistory()">Acompanhar Cursos</button>
+            <button onclick="showSubjectHistory()">Acompanhar Disciplinas</button>
+        </div>
+
+        <!-- Create Course Form -->
+        <div id="create-course" class="card" style="display:none;">
+            <h3>Criar Novo Curso</h3>
+            <div class="form-group">
+                <label for="course-name">Nome do Curso</label>
+                <input type="text" id="course-name" placeholder="Digite o nome do curso">
+            </div>
+            <div class="form-group">
+                <label for="course-description">Descrição</label>
+                <textarea id="course-description" placeholder="Descreva o curso"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="course-syllabus">Ementa</label>
+                <textarea id="course-syllabus" placeholder="Insira a ementa do curso"></textarea>
+            </div>
+            <button onclick="saveCourse()">Salvar Curso</button>
+        </div>
+
+        <!-- Create Subject Form -->
+        <div id="create-subject" class="card" style="display:none;">
+            <h3>Criar Nova Disciplina</h3>
+            <div class="form-group">
+                <label for="subject-name">Nome da Disciplina</label>
+                <input type="text" id="subject-name" placeholder="Digite o nome da disciplina">
+            </div>
+            <div class="form-group">
+                <label for="subject-content">Conteúdo Programático</label>
+                <textarea id="subject-content" placeholder="Digite o conteúdo programático da disciplina"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="subject-hours">Carga Horária</label>
+                <input type="number" id="subject-hours" placeholder="Digite a carga horária da disciplina">
+            </div>
+            <button onclick="saveSubject()">Salvar Disciplina</button>
+        </div>
+
+        <!-- Course History -->
+        <div id="course-history" class="card history" style="display:none;">
+            <h3>Histórico de Cursos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Ementa</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="course-history-body">
+                    <!-- Dynamic content -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Subject History -->
+        <div id="subject-history" class="card history" style="display:none;">
+            <h3>Histórico de Disciplinas</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Conteúdo</th>
+                        <th>Carga Horária</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="subject-history-body">
+                    <!-- Dynamic content -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Show "Criar Curso" form
+        function showCreateCourse() {
+            document.getElementById('create-course').style.display = 'block';
+            document.getElementById('create-subject').style.display = 'none';
+            document.getElementById('course-history').style.display = 'none';
+            document.getElementById('subject-history').style.display = 'none';
+        }
+
+        // Show "Criar Disciplina" form
+        function showCreateSubject() {
+            document.getElementById('create-course').style.display = 'none';
+            document.getElementById('create-subject').style.display = 'block';
+            document.getElementById('course-history').style.display = 'none';
+            document.getElementById('subject-history').style.display = 'none';
+        }
+
+        // Show Course History
+        function showCourseHistory() {
+            document.getElementById('create-course').style.display = 'none';
+            document.getElementById('create-subject').style.display = 'none';
+            document.getElementById('course-history').style.display = 'block';
+            document.getElementById('subject-history').style.display = 'none';
+
+            // Load history (example data)
+            const courseHistoryBody = document.getElementById('course-history-body');
+            courseHistoryBody.innerHTML = `
+                <tr>
+                    <td>Curso de Informática</td>
+                    <td>Curso de introdução à informática</td>
+                    <td>Fundamentos de Computação, Algoritmos</td>
+                    <td><button onclick="editCourse()">Editar</button> <button onclick="deleteCourse()">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td>Curso de Web Design</td>
+                    <td>Curso de design de websites</td>
+                    <td>HTML, CSS, JavaScript</td>
+                    <td><button onclick="editCourse()">Editar</button> <button onclick="deleteCourse()">Excluir</button></td>
+                </tr>
+            `;
+        }
+
+        // Show Subject History
+        function showSubjectHistory() {
+            document.getElementById('create-course').style.display = 'none';
+            document.getElementById('create-subject').style.display = 'none';
+            document.getElementById('course-history').style.display = 'none';
+            document.getElementById('subject-history').style.display = 'block';
+
+            // Load history (example data)
+            const subjectHistoryBody = document.getElementById('subject-history-body');
+            subjectHistoryBody.innerHTML = `
+                <tr>
+                    <td>Matemática Básica</td>
+                    <td>Fundamentos de álgebra e geometria</td>
+                    <td>60h</td>
+                    <td><button onclick="editSubject()">Editar</button> <button onclick="deleteSubject()">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td>Programação Web</td>
+                    <td>Desenvolvimento de sites interativos</td>
+                    <td>80h</td>
+                    <td><button onclick="editSubject()">Editar</button> <button onclick="deleteSubject()">Excluir</button></td>
+                </tr>
+            `;
+        }
+
+        // Save new course
+        function saveCourse() {
+            const name = document.getElementById('course-name').value;
+            const description = document.getElementById('course-description').value;
+            const syllabus = document.getElementById('course-syllabus').value;
+
+            if (name && description && syllabus) {
+                alert('Curso criado com sucesso!');
+                showCourseHistory();
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        }
+
+        // Save new subject
+        function saveSubject() {
+            const name = document.getElementById('subject-name').value;
+            const content = document.getElementById('subject-content').value;
+            const hours = document.getElementById('subject-hours').value;
+
+            if (name && content && hours) {
+                alert('Disciplina criada com sucesso!');
+                showSubjectHistory();
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        }
+
+        // Edit course
+        function editCourse() {
+            alert('Editar Curso');
+        }
+
+        // Delete course
+        function deleteCourse() {
+            alert('Excluir Curso');
+        }
+
+        // Edit subject
+        function editSubject() {
+            alert('Editar Disciplina');
+        }
+
+        // Delete subject
+        function deleteSubject() {
+            alert('Excluir Disciplina');
+        }
+    </script>
+
+</body>
+
+</html>

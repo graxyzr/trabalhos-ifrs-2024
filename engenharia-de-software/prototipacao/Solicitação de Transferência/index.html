@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Transferência</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header,
+        .footer {
+            background-color: #2E7D32;
+            /* Cor verde dos arquivos anteriores */
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1,
+        .footer p {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select,
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group button {
+            background-color: #2E7D32;
+            /* Cor verde dos arquivos anteriores */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #1B5E20;
+            /* Cor verde mais escura para o hover */
+        }
+
+        .message {
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+
+        .status {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .status h3 {
+            color: #2E7D32;
+        }
+
+        .status p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Solicitação de Transferência</h1>
+    </header>
+
+    <div class="container">
+        <h2>Formulário de Solicitação de Transferência</h2>
+        <form id="transferForm" onsubmit="submeterSolicitacao(event)">
+            <div class="form-group">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="matricula">Número da Matrícula:</label>
+                <input type="text" id="matricula" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cursoOrigem">Curso de Origem:</label>
+                <input type="text" id="cursoOrigem" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cursoDestino">Curso de Destino:</label>
+                <input type="text" id="cursoDestino" required>
+            </div>
+
+            <div class="form-group">
+                <label for="motivo">Motivo da Transferência:</label>
+                <textarea id="motivo" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Enviar Solicitação</button>
+            </div>
+        </form>
+
+        <div id="resultado" class="hidden"></div>
+
+        <div id="statusSolicitacao" class="status hidden">
+            <h3>Status da Solicitação</h3>
+            <p><strong>Solicitação Nº:</strong> <span id="numeroSolicitacao">12345</span></p>
+            <p><strong>Status:</strong> <span id="statusSolicitacaoTexto">Em Processamento</span></p>
+            <p><strong>Data da Solicitação:</strong> <span id="dataSolicitacao">12/12/2024</span></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Solicitação de Transferência. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function submeterSolicitacao(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById("nome").value;
+            const matricula = document.getElementById("matricula").value;
+            const cursoOrigem = document.getElementById("cursoOrigem").value;
+            const cursoDestino = document.getElementById("cursoDestino").value;
+            const motivo = document.getElementById("motivo").value;
+            const resultado = document.getElementById("resultado");
+
+            if (!nome || !matricula || !cursoOrigem || !cursoDestino || !motivo) {
+                exibirMensagem(resultado, "Por favor, preencha todos os campos.", "error");
+                return;
+            }
+
+            exibirMensagem(resultado, "Solicitação enviada com sucesso!", "success");
+
+            // Exibir status da solicitação
+            const statusSolicitacao = document.getElementById("statusSolicitacao");
+            statusSolicitacao.classList.remove("hidden");
+        }
+
+        function exibirMensagem(elemento, texto, tipo) {
+            elemento.className = `message ${tipo}`;
+            elemento.innerText = texto;
+            elemento.classList.remove("hidden");
+            setTimeout(() => elemento.classList.add("hidden"), 3000);
+        }
+    </script>
+</body>
+
+</html>

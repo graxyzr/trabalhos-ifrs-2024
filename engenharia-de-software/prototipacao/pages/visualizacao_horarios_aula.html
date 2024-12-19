@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualização de Horários de Aula</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .schedule {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        tfoot {
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Visualização de Horários de Aula</h1>
+    </header>
+    <main>
+        <div class="schedule">
+            <h2>Horários do Semestre</h2>
+            <select id="semestre">
+                <option value="2024.1">2024.1</option>
+                <option value="2024.2">2024.2</option>
+            </select>
+            <button onclick="atualizarHorarios()">Consultar</button>
+            <table id="horarios">
+                <thead>
+                    <tr>
+                        <th>Horário</th>
+                        <th>Segunda-feira</th>
+                        <th>Terça-feira</th>
+                        <th>Quarta-feira</th>
+                        <th>Quinta-feira</th>
+                        <th>Sexta-feira</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script>
+        function atualizarHorarios() {
+            var semestre = document.getElementById("semestre").value;
+            var tabela = document.getElementById("horarios").getElementsByTagName('tbody')[0];
+            tabela.innerHTML = '';
+
+            var horariosExemplo_2024_1 = [
+                ["08:00 - 10:00", "Matemática", "Português", "", "Matemática", ""],
+                ["10:00 - 12:00", "Geografia", "Biologia", "", "Geografia", ""],
+                ["14:00 - 16:00", "", "", "Física", "Química", ""],
+            ];
+
+            var horariosExemplo_2024_2 = [
+                ["08:00 - 10:00", "História", "Português", "", "Matemática", ""],
+                ["10:00 - 12:00", "Geografia", "Física", "", "Química", ""],
+                ["14:00 - 16:00", "", "", "Inglês", "Biologia", ""],
+            ];
+
+            var horarios;
+            if (semestre === "2024.1") {
+                horarios = horariosExemplo_2024_1;
+            } else if (semestre === "2024.2") {
+                horarios = horariosExemplo_2024_2;
+            }
+
+            horarios.forEach(function (horario) {
+                var row = tabela.insertRow();
+                horario.forEach(function (disciplina) {
+                    var cell = row.insertCell();
+                    cell.textContent = disciplina;
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

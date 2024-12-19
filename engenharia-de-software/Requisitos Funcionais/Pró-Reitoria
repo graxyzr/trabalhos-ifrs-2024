@@ -1,0 +1,38 @@
+1. Acesso ao Sistema:
+RF01: A Pró-Reitoria deve conseguir se autenticar no sistema com credenciais exclusivas para acesso a dados sensíveis e relatórios estratégicos.
+RF02: Deve ser possível recuperar ou redefinir senhas de forma segura.
+
+
+2. Gerenciamento Estratégico:
+RF03: A Pró-Reitoria precisa acessar painéis de controle e relatórios detalhados sobre a performance institucional, incluindo indicadores-chave de desempenho (KPIs) acadêmicos.
+RF04: Deve ser capaz de visualizar e analisar tendências de matrícula, taxa de sucesso dos alunos, e desempenho docente.
+
+
+3. Normas e Políticas Acadêmicas:
+RF05: A Pró-Reitoria deve ter ferramentas para definir e disseminar normas acadêmicas, políticas, e regulamentos institucionais.
+RF06: O sistema deve permitir a revisão e atualização de currículos, programas de estudo, e pré-requisitos conforme as diretrizes estratégicas.
+
+
+4. Integração Institucional:
+RF07: Deve possibilitar a gestão da oferta acadêmica em toda a instituição, promovendo a integração entre diferentes unidades, cursos, e departamentos.
+RF08: O sistema deve apoiar iniciativas de internacionalização, incluindo programas de intercâmbio e cursos em línguas estrangeiras.
+
+
+5. Apoio e Fomento à Pesquisa:
+RF09: A plataforma deve permitir o gerenciamento de projetos de pesquisa, alocação de recursos e publicação de resultados.
+RF10: O sistema deve facilitar a colaboração com instituições parceiras, industrias e outras entidades de fomento à pesquisa.
+
+
+6. Gestão de Qualidade:
+RF11: A Pró-Reitoria precisa de funcionalidades para conduzir avaliações internas e preparar para avaliações externas (ex.: MEC, CAPES), com o objetivo de garantia da qualidade.
+RF12: Deve ser possível realizar auditorias de cursos e departamentos, avaliando aderência às políticas internas e regulamentos externos.
+
+
+7. Melhoria Contínua:
+RF13: O sistema deve prover meios para implementar ações baseadas em feedback de alunos, professores e outros stakeholders.
+RF14: Deve ser possível monitorar e avaliar a eficácia das melhorias e inovações implementadas nos processos e práticas acadêmicas.
+
+
+8. Gestão Financeira e Recursos:
+RF15: Integração com sistemas de gestão financeira para supervisão do orçamento dedicado a atividades acadêmicas, bolsas de estudo, e infraestrutura.
+RF16: O sistema deve suportar o planejamento e alocação de recursos para departamentos, laboratórios, e demais unidades acadêmicas.

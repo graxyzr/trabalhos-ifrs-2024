@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emissão de Certificados e Diplomas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e8f0fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #4a90e2;
+            font-weight: bold;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            padding: 15px;
+            background-color: #f7faff;
+            border: 1px solid #d6e4f0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        button,
+        input[type="submit"] {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background-color: #357abd;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #4a90e2;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Sistema de Emissão de Certificados e Diplomas</h1>
+    </header>
+
+    <main>
+        <!-- Navegação -->
+        <nav>
+            <a href="#receber-solicitacao">Receber Solicitação</a>
+            <a href="#verificar-requisitos">Verificar Requisitos</a>
+            <a href="#preparar-certificado">Preparar Certificado</a>
+            <a href="#emitir-notificar">Emitir e Notificar</a>
+        </nav>
+
+        <!-- Seção: Receber Solicitação -->
+        <section id="receber-solicitacao" class="card">
+            <h2>Receber Solicitação de Certificado</h2>
+            <p>Revise as solicitações de certificados submetidas pelos alunos.</p>
+            <button>Receber Solicitação</button>
+        </section>
+
+        <!-- Seção: Verificar Requisitos -->
+        <section id="verificar-requisitos" class="card">
+            <h2>Verificar Requisitos Acadêmicos</h2>
+            <form action="/verificar-requisitos" method="POST">
+                <label for="nome">Nome do Aluno:</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite o nome do aluno" required>
+
+                <label for="matricula">Número de Matrícula:</label>
+                <input type="text" id="matricula" name="matricula" placeholder="Digite o número de matrícula" required>
+
+                <input type="submit" value="Verificar Requisitos">
+            </form>
+        </section>
+
+        <!-- Seção: Preparar Certificado -->
+        <section id="preparar-certificado" class="card">
+            <h2>Preparar Certificado</h2>
+            <p>Para solicitações aprovadas, utilize o sistema para preparar o certificado do aluno.</p>
+            <button>Preparar Certificado</button>
+        </section>
+
+        <!-- Seção: Emitir e Notificar -->
+        <section id="emitir-notificar" class="card">
+            <h2>Emitir e Notificar</h2>
+            <p>Clique no botão abaixo para emitir o certificado.</p>
+            <button>Emitir Certificado</button>
+            <p>Notifique o aluno sobre a emissão do certificado utilizando o botão abaixo.</p>
+            <button>Notificar Aluno</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sistema de Emissão de Certificados e Diplomas</p>
+    </footer>
+
+</body>
+
+</html>

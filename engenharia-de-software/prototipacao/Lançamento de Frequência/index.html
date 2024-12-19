@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançamento de Frequência</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #3b5998;
+            color: white;
+            text-align: center;
+            padding: 1.5em 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .dashboard,
+        .frequency-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #3b5998;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2d4373;
+        }
+
+        .frequency-container {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3b5998;
+            color: white;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Lançamento de Frequência</h1>
+        <p>Registre e gerencie a frequência dos alunos</p>
+    </header>
+    <div class="container">
+        <!-- Menu Principal -->
+        <div class="dashboard">
+            <h2>Escolha uma disciplina</h2>
+            <div id="disciplinas">
+                <!-- Disciplinas serão listadas aqui -->
+            </div>
+        </div>
+
+        <!-- Lançamento de Frequência -->
+        <div class="frequency-container" id="frequency-container">
+            <h2>Lançamento de Frequência</h2>
+            <table id="frequency-table">
+                <thead>
+                    <tr>
+                        <th>Nome do Aluno</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Alunos serão listados aqui -->
+                </tbody>
+            </table>
+            <div class="actions">
+                <button id="btn-marcar-todos-presentes">Marcar Todos Presentes</button>
+                <button id="btn-marcar-todos-ausentes">Marcar Todos Ausentes</button>
+                <button id="btn-confirmar-lancamento">Confirmar Lançamento</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados simulados de disciplinas e alunos
+        const disciplinas = [
+            { id: 1, nome: "Matemática" },
+            { id: 2, nome: "Física" }
+        ];
+        const alunos = [
+            { id: 1, nome: "Ana" },
+            { id: 2, nome: "Bruno" },
+            { id: 3, nome: "Carla" }
+        ];
+
+        // Referências ao DOM
+        const disciplinasDiv = document.getElementById("disciplinas");
+        const frequencyContainer = document.getElementById("frequency-container");
+        const frequencyTableBody = document.querySelector("#frequency-table tbody");
+        const btnMarcarTodosPresentes = document.getElementById("btn-marcar-todos-presentes");
+        const btnMarcarTodosAusentes = document.getElementById("btn-marcar-todos-ausentes");
+        const btnConfirmarLancamento = document.getElementById("btn-confirmar-lancamento");
+
+        // Exibir disciplinas
+        disciplinasDiv.innerHTML = disciplinas.map(disciplina => `
+            <button class="btn-disciplina" data-id="${disciplina.id}">${disciplina.nome}</button>
+        `).join("");
+
+        // Lançar frequência para uma disciplina
+        disciplinasDiv.addEventListener("click", (e) => {
+            if (e.target.classList.contains("btn-disciplina")) {
+                carregarTabelaFrequencia();
+                frequencyContainer.style.display = "block";
+            }
+        });
+
+        // Carregar tabela de frequência
+        function carregarTabelaFrequencia() {
+            frequencyTableBody.innerHTML = alunos.map(aluno => `
+                <tr>
+                    <td>${aluno.nome}</td>
+                    <td id="status-${aluno.id}">Ausente</td>
+                    <td>
+                        <button class="btn-presente" data-id="${aluno.id}">Presente</button>
+                        <button class="btn-ausente" data-id="${aluno.id}">Ausente</button>
+                    </td>
+                </tr>
+            `).join("");
+        }
+
+        // Marcar individualmente
+        frequencyTableBody.addEventListener("click", (e) => {
+            if (e.target.classList.contains("btn-presente")) {
+                const alunoId = e.target.dataset.id;
+                document.getElementById(`status-${alunoId}`).textContent = "Presente";
+            } else if (e.target.classList.contains("btn-ausente")) {
+                const alunoId = e.target.dataset.id;
+                document.getElementById(`status-${alunoId}`).textContent = "Ausente";
+            }
+        });
+
+        // Marcar todos presentes
+        btnMarcarTodosPresentes.addEventListener("click", () => {
+            alunos.forEach(aluno => {
+                document.getElementById(`status-${aluno.id}`).textContent = "Presente";
+            });
+        });
+
+        // Marcar todos ausentes
+        btnMarcarTodosAusentes.addEventListener("click", () => {
+            alunos.forEach(aluno => {
+                document.getElementById(`status-${aluno.id}`).textContent = "Ausente";
+            });
+        });
+
+        // Confirmar lançamento
+        btnConfirmarLancamento.addEventListener("click", () => {
+            alert("Frequência registrada com sucesso!");
+            frequencyContainer.style.display = "none";
+        });
+    </script>
+</body>
+
+</html>

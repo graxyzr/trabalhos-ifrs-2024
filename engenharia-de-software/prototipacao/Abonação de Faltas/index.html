@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abonação de Faltas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #34495e;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #34495e;
+            font-weight: bold;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        button,
+        input[type="submit"] {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background-color: #3498db;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Sistema de Abonação de Faltas</h1>
+    </header>
+
+    <main>
+        <!-- Navegação -->
+        <nav>
+            <a href="#historico">Acessar Histórico Escolar</a>
+            <a href="#localizar">Localizar Aluno</a>
+            <a href="#abonar">Abonar Faltas</a>
+            <a href="#correcao">Solicitar Correção</a>
+            <a href="#confirmacao">Receber Confirmação</a>
+        </nav>
+
+        <!-- Seção: Acessar Histórico Escolar -->
+        <section id="historico" class="card">
+            <h2>Acessar Histórico Escolar</h2>
+            <p>Visualize os dados acadêmicos dos alunos para verificar as faltas.</p>
+            <button>Acessar Histórico</button>
+        </section>
+
+        <!-- Seção: Localizar Aluno -->
+        <section id="localizar" class="card">
+            <h2>Localizar Aluno</h2>
+            <p>Digite o nome do aluno no campo abaixo para encontrá-lo no sistema.</p>
+            <form action="/localizar-aluno" method="POST">
+                <label for="nome-aluno">Nome do Aluno:</label>
+                <input type="text" id="nome-aluno" name="nome-aluno" required>
+                <input type="submit" value="Localizar">
+            </form>
+        </section>
+
+        <!-- Seção: Abonar Faltas -->
+        <section id="abonar" class="card">
+            <h2>Abonar Faltas</h2>
+            <p>Preencha os detalhes necessários para registrar a abonação de faltas.</p>
+            <form action="/abonar-faltas" method="POST">
+                <label for="motivo">Motivo da Abonação:</label>
+                <textarea id="motivo" name="motivo" rows="4" required></textarea>
+                <input type="submit" value="Abonar Faltas">
+            </form>
+        </section>
+
+        <!-- Seção: Solicitar Correção -->
+        <section id="correcao" class="card">
+            <h2>Solicitar Correção</h2>
+            <p>Envie uma solicitação de correção das faltas, se necessário.</p>
+            <form action="/solicitar-correcao" method="POST">
+                <label for="mensagem-correcao">Mensagem:</label>
+                <textarea id="mensagem-correcao" name="mensagem-correcao" rows="4" required></textarea>
+                <input type="submit" value="Solicitar Correção">
+            </form>
+        </section>
+
+        <!-- Seção: Receber Confirmação -->
+        <section id="confirmacao" class="card">
+            <h2>Receber Confirmação</h2>
+            <p>Após registrar a abonação de faltas, o sistema enviará uma confirmação.</p>
+            <button>Receber Confirmação</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sistema de Abonação de Faltas</p>
+    </footer>
+
+</body>
+
+</html>

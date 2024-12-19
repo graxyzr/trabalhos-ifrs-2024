@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emissão de Atestado de Matrícula</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        form label {
+            font-weight: bold;
+        }
+
+        form input,
+        form textarea,
+        form select {
+            width: 100%;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button,
+        input[type="submit"] {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background-color: #3498db;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Sistema de Emissão de Atestado de Matrícula</h1>
+    </header>
+
+    <main>
+        <!-- Navegação -->
+        <nav>
+            <a href="#receber-solicitacao">Receber Solicitação</a>
+            <a href="#verificar-status">Verificar Status</a>
+            <a href="#preparar-atestado">Preparar Atestado</a>
+            <a href="#emitir-enviar">Emitir e Enviar</a>
+        </nav>
+
+        <!-- Seção: Receber Solicitação -->
+        <section id="receber-solicitacao" class="card">
+            <h2>Receber Solicitação</h2>
+            <p>Verifique o tipo de solicitação recebida e os dados do aluno.</p>
+            <button>Receber Solicitação</button>
+        </section>
+
+        <!-- Seção: Verificar Status -->
+        <section id="verificar-status" class="card">
+            <h2>Verificar Status de Matrícula</h2>
+            <form action="/verificar-status" method="POST">
+                <label for="nome">Nome do Aluno:</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite o nome do aluno" required>
+
+                <label for="matricula">Número de Matrícula:</label>
+                <input type="text" id="matricula" name="matricula" placeholder="Digite o número de matrícula" required>
+
+                <input type="submit" value="Verificar Status">
+            </form>
+        </section>
+
+        <!-- Seção: Preparar Atestado -->
+        <section id="preparar-atestado" class="card">
+            <h2>Preparar Atestado de Matrícula</h2>
+            <p>Se o aluno estiver matriculado, o sistema gerará o atestado com as informações do aluno.</p>
+            <button>Preparar Atestado</button>
+        </section>
+
+        <!-- Seção: Emitir e Enviar -->
+        <section id="emitir-enviar" class="card">
+            <h2>Emitir e Enviar Atestado</h2>
+            <p>Clique no botão abaixo para emitir o atestado de matrícula.</p>
+            <button>Emitir Atestado</button>
+            <p>Após a emissão, use o botão abaixo para enviar o documento ao aluno.</p>
+            <button>Enviar Atestado</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sistema de Emissão de Atestado de Matrícula</p>
+    </footer>
+
+</body>
+
+</html>

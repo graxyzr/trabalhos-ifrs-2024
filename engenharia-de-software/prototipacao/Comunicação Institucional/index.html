@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicação Institucional</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .history {
+            margin-top: 20px;
+        }
+
+        .history table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history th,
+        .history td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .history th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Sistema de Comunicação Institucional</h1>
+        <p>Direção - Gerenciamento de Eventos e Comunicados</p>
+    </div>
+
+    <div class="container">
+        <!-- Main Section -->
+        <div class="card">
+            <h3>Comunicação Institucional</h3>
+            <button onclick="showCreateEvent()">Criar Evento</button>
+            <button onclick="showSendMessage()">Enviar Comunicado</button>
+            <button onclick="showEventHistory()">Acompanhar Comunicados</button>
+        </div>
+
+        <!-- Create Event Form -->
+        <div id="create-event" class="card" style="display:none;">
+            <h3>Criar Novo Evento</h3>
+            <div class="form-group">
+                <label for="event-title">Título do Evento</label>
+                <input type="text" id="event-title" placeholder="Digite o título do evento">
+            </div>
+            <div class="form-group">
+                <label for="event-date">Data</label>
+                <input type="date" id="event-date">
+            </div>
+            <div class="form-group">
+                <label for="event-time">Hora</label>
+                <input type="time" id="event-time">
+            </div>
+            <div class="form-group">
+                <label for="event-description">Descrição</label>
+                <textarea id="event-description" placeholder="Descreva o evento"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="event-audience">Público-Alvo</label>
+                <select id="event-audience">
+                    <option value="Alunos">Alunos</option>
+                    <option value="Professores">Professores</option>
+                    <option value="Todos">Todos</option>
+                </select>
+            </div>
+            <button onclick="saveEvent()">Salvar Evento</button>
+        </div>
+
+        <!-- Send Message Form -->
+        <div id="send-message" class="card" style="display:none;">
+            <h3>Enviar Comunicado</h3>
+            <div class="form-group">
+                <label for="message-audience">Público-Alvo</label>
+                <select id="message-audience">
+                    <option value="Alunos">Alunos</option>
+                    <option value="Professores">Professores</option>
+                    <option value="Todos">Todos</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message-content">Conteúdo</label>
+                <textarea id="message-content" placeholder="Digite o conteúdo do comunicado"></textarea>
+            </div>
+            <button onclick="sendMessage()">Enviar Comunicado</button>
+        </div>
+
+        <!-- Event History -->
+        <div id="event-history" class="card history" style="display:none;">
+            <h3>Histórico de Comunicados</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Data</th>
+                        <th>Público-Alvo</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="history-table-body">
+                    <!-- Dynamic content -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Show "Criar Evento" form
+        function showCreateEvent() {
+            document.getElementById('create-event').style.display = 'block';
+            document.getElementById('send-message').style.display = 'none';
+            document.getElementById('event-history').style.display = 'none';
+        }
+
+        // Show "Enviar Comunicado" form
+        function showSendMessage() {
+            document.getElementById('create-event').style.display = 'none';
+            document.getElementById('send-message').style.display = 'block';
+            document.getElementById('event-history').style.display = 'none';
+        }
+
+        // Show event history
+        function showEventHistory() {
+            document.getElementById('create-event').style.display = 'none';
+            document.getElementById('send-message').style.display = 'none';
+            document.getElementById('event-history').style.display = 'block';
+
+            // Load history (example data)
+            const historyTableBody = document.getElementById('history-table-body');
+            historyTableBody.innerHTML = `
+                <tr>
+                    <td>Evento A</td>
+                    <td>12/12/2024</td>
+                    <td>Todos</td>
+                    <td>Enviado</td>
+                </tr>
+                <tr>
+                    <td>Evento B</td>
+                    <td>15/12/2024</td>
+                    <td>Professores</td>
+                    <td>Pendente</td>
+                </tr>
+            `;
+        }
+
+        // Save new event
+        function saveEvent() {
+            const title = document.getElementById('event-title').value;
+            const date = document.getElementById('event-date').value;
+            const time = document.getElementById('event-time').value;
+            const description = document.getElementById('event-description').value;
+            const audience = document.getElementById('event-audience').value;
+
+            if (title && date && time && description && audience) {
+                alert('Evento criado com sucesso!');
+                showEventHistory();
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        }
+
+        // Send a message
+        function sendMessage() {
+            const audience = document.getElementById('message-audience').value;
+            const content = document.getElementById('message-content').value;
+
+            if (audience && content) {
+                alert('Comunicado enviado com sucesso!');
+                showEventHistory();
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        }
+    </script>
+</body>
+
+</html>

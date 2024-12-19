@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferência de Aluno e Professor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        button,
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background-color: #217dbb;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Sistema de Transferência de Aluno e Professor</h1>
+    </header>
+
+    <main>
+        <!-- Navegação -->
+        <nav>
+            <a href="#receber-solicitacao">Receber Solicitação</a>
+            <a href="#verificar-documentacao">Verificar Documentação</a>
+            <a href="#validar-transferencia">Validar Transferência</a>
+            <a href="#registrar-transferencia">Registrar Transferência</a>
+            <a href="#atualizar-dados">Atualizar Dados Acadêmicos</a>
+            <a href="#enviar-notificacao">Enviar Notificação</a>
+        </nav>
+
+        <!-- Seção: Receber Solicitação -->
+        <section id="receber-solicitacao" class="card">
+            <h2>Receber Solicitação de Transferência</h2>
+            <form action="/receber-solicitacao" method="POST">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite o nome do aluno ou professor" required>
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" name="cpf" placeholder="Digite o CPF" required>
+                <input type="submit" value="Receber Solicitação">
+            </form>
+        </section>
+
+        <!-- Seção: Verificar Documentação -->
+        <section id="verificar-documentacao" class="card">
+            <h2>Verificar Documentação</h2>
+            <p>Reveja os documentos fornecidos e certifique-se de que estão completos.</p>
+            <button>Verificar Documentação</button>
+        </section>
+
+        <!-- Seção: Validar Transferência -->
+        <section id="validar-transferencia" class="card">
+            <h2>Validar Transferência</h2>
+            <form action="/validar-transferencia" method="POST">
+                <label for="requisitos">Requisitos Atendidos:</label>
+                <textarea id="requisitos" name="requisitos" rows="5"
+                    placeholder="Descreva os requisitos atendidos"></textarea>
+                <input type="submit" value="Validar Transferência">
+            </form>
+        </section>
+
+        <!-- Seção: Registrar Transferência -->
+        <section id="registrar-transferencia" class="card">
+            <h2>Registrar Transferência</h2>
+            <form action="/registrar-transferencia" method="POST">
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="transferido">Transferido</option>
+                </select>
+                <input type="submit" value="Registrar Transferência">
+            </form>
+        </section>
+
+        <!-- Seção: Atualizar Dados Acadêmicos -->
+        <section id="atualizar-dados" class="card">
+            <h2>Atualizar Dados Acadêmicos</h2>
+            <form action="/atualizar-dados" method="POST">
+                <label for="historico">Histórico Acadêmico:</label>
+                <textarea id="historico" name="historico" rows="5"
+                    placeholder="Atualize os dados no histórico"></textarea>
+                <input type="submit" value="Atualizar Dados">
+            </form>
+        </section>
+
+        <!-- Seção: Enviar Notificação -->
+        <section id="enviar-notificacao" class="card">
+            <h2>Enviar Notificação</h2>
+            <form action="/enviar-notificacao" method="POST">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="Digite o e-mail do aluno ou professor"
+                    required>
+                <input type="submit" value="Enviar Notificação">
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sistema de Transferência de Aluno e Professor</p>
+    </footer>
+
+</body>
+
+</html>

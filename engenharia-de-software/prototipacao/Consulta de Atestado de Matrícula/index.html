@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Atestado de Matrícula</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header,
+        .footer {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+
+        .preview {
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #4caf50;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: #a94442;
+            background-color: #f2dede;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ebccd1;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Sistema de Consulta de Atestado de Matrícula</h1>
+    </header>
+
+    <div class="container">
+        <h2>Solicitar Atestado de Matrícula</h2>
+        <form id="atestadoForm" onsubmit="solicitarAtestado(event)">
+            <div class="form-group">
+                <label for="username">Nome de Usuário:</label>
+                <input type="text" id="username" placeholder="Digite seu nome de usuário" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" placeholder="Digite sua senha" required>
+            </div>
+
+            <div class="form-group">
+                <label for="periodo">Selecione o Período Letivo:</label>
+                <select id="periodo" required>
+                    <option value="">Escolha um período</option>
+                    <option value="2024/1">2024/1</option>
+                    <option value="2024/2">2024/2</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Submeter Solicitação</button>
+            </div>
+        </form>
+
+        <div id="resultado" class="hidden"></div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Consulta de Atestado de Matrícula. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function solicitarAtestado(event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const periodo = document.getElementById("periodo").value;
+            const resultado = document.getElementById("resultado");
+
+            if (!username || !password || !periodo) {
+                resultado.className = "error";
+                resultado.textContent = "Por favor, preencha todos os campos.";
+                resultado.style.display = "block";
+                return;
+            }
+
+            resultado.className = "preview";
+            resultado.innerHTML = `
+                <p><strong>Atestado de Matrícula Gerado com Sucesso!</strong></p>
+                <p>Nome do Aluno: ${username}</p>
+                <p>Período Letivo: ${periodo}</p>
+                <button onclick="baixarAtestado()">Baixar Atestado</button>
+                <button onclick="enviarPorEmail()">Enviar por E-mail</button>
+            `;
+            resultado.style.display = "block";
+        }
+
+        function baixarAtestado() {
+            alert("O atestado será baixado em breve!");
+        }
+
+        function enviarPorEmail() {
+            alert("O atestado foi enviado para o seu e-mail registrado.");
+        }
+    </script>
+</body>
+
+</html>

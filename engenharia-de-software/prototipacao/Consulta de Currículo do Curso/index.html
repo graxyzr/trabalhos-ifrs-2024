@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Currículo do Curso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header,
+        .footer {
+            background-color: #004d99;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1,
+        .footer p {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #004d99;
+        }
+
+        .btn {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #004d99;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #003366;
+        }
+
+        .btn-secondary {
+            background-color: #888;
+        }
+
+        .btn-secondary:hover {
+            background-color: #555;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #004d99;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Sistema de Consulta de Currículo do Curso</h1>
+    </header>
+
+    <div class="container">
+        <h2>Consulta e Modificação de Currículo</h2>
+        <div class="form-group">
+            <label for="curso">Selecione o Curso:</label>
+            <select id="curso" onchange="exibirCurriculo()">
+                <option value="">-- Escolha um curso --</option>
+                <option value="informatica">Informática</option>
+                <option value="administracao">Administração</option>
+                <option value="engenharia">Engenharia</option>
+            </select>
+        </div>
+
+        <div id="curriculo" class="hidden">
+            <h3>Currículo Atual</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Disciplina</th>
+                        <th>Ementa</th>
+                        <th>Carga Horária</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-curriculo">
+                    <!-- Linhas serão preenchidas dinamicamente -->
+                </tbody>
+            </table>
+            <button class="btn" onclick="adicionarDisciplina()">Adicionar Disciplina</button>
+        </div>
+
+        <!-- Formulário Modal -->
+        <div id="form-modal" class="hidden">
+            <h3 id="form-title">Adicionar/Editar Disciplina</h3>
+            <div class="form-group">
+                <label for="disciplina">Nome da Disciplina:</label>
+                <input type="text" id="disciplina" placeholder="Ex: Matemática">
+            </div>
+            <div class="form-group">
+                <label for="ementa">Ementa:</label>
+                <textarea id="ementa" rows="3" placeholder="Insira a ementa da disciplina"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="carga-horaria">Carga Horária:</label>
+                <input type="number" id="carga-horaria" placeholder="Ex: 60">
+            </div>
+            <button class="btn" onclick="salvarDisciplina()">Salvar</button>
+            <button class="btn-secondary" onclick="fecharFormulario()">Cancelar</button>
+        </div>
+
+        <div id="resultado" class="message hidden"></div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Consulta de Currículo do Curso</p>
+    </footer>
+
+    <script>
+        const disciplinas = {
+            informatica: [
+                { nome: "Programação", ementa: "Introdução à lógica de programação", cargaHoraria: 60 },
+                { nome: "Redes", ementa: "Fundamentos de redes de computadores", cargaHoraria: 40 },
+            ],
+            administracao: [],
+            engenharia: [],
+        };
+
+        function exibirCurriculo() {
+            const curso = document.getElementById('curso').value;
+            const tabela = document.getElementById('tabela-curriculo');
+            const curriculoDiv = document.getElementById('curriculo');
+
+            if (curso && disciplinas[curso]) {
+                tabela.innerHTML = disciplinas[curso]
+                    .map(
+                        (disciplina, index) => `
+                        <tr>
+                            <td>${disciplina.nome}</td>
+                            <td>${disciplina.ementa}</td>
+                            <td>${disciplina.cargaHoraria}</td>
+                            <td>
+                                <button class="btn" onclick="editarDisciplina('${curso}', ${index})">Editar</button>
+                                <button class="btn-secondary" onclick="removerDisciplina('${curso}', ${index})">Remover</button>
+                            </td>
+                        </tr>
+                    `
+                    )
+                    .join('');
+                curriculoDiv.classList.remove('hidden');
+            } else {
+                curriculoDiv.classList.add('hidden');
+            }
+        }
+
+        function adicionarDisciplina() {
+            exibirFormulario("Adicionar Disciplina");
+        }
+
+        function editarDisciplina(curso, index) {
+            const disciplina = disciplinas[curso][index];
+            document.getElementById('disciplina').value = disciplina.nome;
+            document.getElementById('ementa').value = disciplina.ementa;
+            document.getElementById('carga-horaria').value = disciplina.cargaHoraria;
+            exibirFormulario("Editar Disciplina");
+        }
+
+        function removerDisciplina(curso, index) {
+            disciplinas[curso].splice(index, 1);
+            exibirCurriculo();
+        }
+
+        function exibirFormulario(titulo) {
+            document.getElementById('form-title').innerText = titulo;
+            document.getElementById('form-modal').classList.remove('hidden');
+        }
+
+        function fecharFormulario() {
+            document.getElementById('form-modal').classList.add('hidden');
+        }
+
+        function salvarDisciplina() {
+            const curso = document.getElementById('curso').value;
+            const nome = document.getElementById('disciplina').value;
+            const ementa = document.getElementById('ementa').value;
+            const cargaHoraria = document.getElementById('carga-horaria').value;
+
+            disciplinas[curso].push({ nome, ementa, cargaHoraria });
+            fecharFormulario();
+            exibirCurriculo();
+        }
+    </script>
+</body>
+
+</html>

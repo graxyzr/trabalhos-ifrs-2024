@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Fóruns de Discussão</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #3b5998;
+            color: white;
+            text-align: center;
+            padding: 1.5em 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .dashboard {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #3b5998;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2d4373;
+        }
+
+        .forums-container,
+        .forum-details-container,
+        .moderation-container {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .forum {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .forum:last-child {
+            border-bottom: none;
+        }
+
+        .forum p {
+            margin: 5px 0;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Gerenciamento de Fóruns de Discussão</h1>
+        <p>Crie e gerencie fóruns de discussão para suas turmas</p>
+    </header>
+    <div class="container">
+        <div class="dashboard">
+            <h2>Escolha uma ação</h2>
+            <button id="btn-minhas-turmas">Minhas Turmas</button>
+        </div>
+
+        <!-- Lista de Turmas -->
+        <div class="forums-container" id="forums-container">
+            <h2>Minhas Turmas</h2>
+            <div id="lista-turmas">
+                <!-- Turmas serão listadas aqui -->
+            </div>
+        </div>
+
+        <!-- Detalhes do Fórum -->
+        <div class="forum-details-container" id="forum-details-container">
+            <h2>Gerenciar Fóruns</h2>
+            <div id="forum-details">
+                <!-- Detalhes do fórum -->
+            </div>
+            <button id="btn-criar-forum">Criar Fórum</button>
+        </div>
+
+        <!-- Criação/Edição de Fórum -->
+        <div class="forum-creation-container" id="forum-creation-container">
+            <h2 id="forum-title">Criar Novo Fórum</h2>
+            <form id="forum-form">
+                <label for="forum-topic">Tópico do Fórum</label>
+                <textarea id="forum-topic" placeholder="Digite o tópico do fórum"></textarea>
+
+                <label for="forum-rules">Regras do Fórum</label>
+                <textarea id="forum-rules" placeholder="Digite as regras do fórum"></textarea>
+
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+
+        <!-- Moderação -->
+        <div class="moderation-container" id="moderation-container">
+            <h2>Moderação</h2>
+            <div id="moderation-content">
+                <!-- Postagens para moderação -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados simulados de turmas e fóruns
+        const turmas = [
+            { id: 1, nome: "Matemática A", forums: [] },
+            { id: 2, nome: "Física B", forums: [] }
+        ];
+
+        // Referências ao DOM
+        const btnMinhasTurmas = document.getElementById("btn-minhas-turmas");
+        const forumsContainer = document.getElementById("forums-container");
+        const listaTurmas = document.getElementById("lista-turmas");
+        const forumDetailsContainer = document.getElementById("forum-details-container");
+        const forumCreationContainer = document.getElementById("forum-creation-container");
+        const forumForm = document.getElementById("forum-form");
+        const forumTitle = document.getElementById("forum-title");
+        const moderationContainer = document.getElementById("moderation-container");
+
+        let currentTurma = null;
+
+        // Exibir turmas
+        btnMinhasTurmas.addEventListener("click", () => {
+            listaTurmas.innerHTML = turmas
+                .map(turma => `
+                    <div class="turma">
+                        <p><strong>${turma.nome}</strong></p>
+                        <button class="btn-gerenciar" data-id="${turma.id}">Gerenciar Fóruns</button>
+                    </div>
+                `).join("");
+            forumsContainer.style.display = "block";
+        });
+
+        // Gerenciar fóruns
+        listaTurmas.addEventListener("click", (e) => {
+            if (e.target.classList.contains("btn-gerenciar")) {
+                const turmaId = e.target.dataset.id;
+                currentTurma = turmas.find(turma => turma.id == turmaId);
+                forumDetailsContainer.innerHTML = `
+                    <h2>Fóruns da turma: ${currentTurma.nome}</h2>
+                    <div id="lista-forums">
+                        ${currentTurma.forums.map(forum => `
+                            <div class="forum">
+                                <p><strong>${forum.titulo}</strong></p>
+                                <p>${forum.regras}</p>
+                                <button class="btn-moderar" data-id="${forum.id}">Moderar</button>
+                            </div>
+                        `).join("") || "<p>Nenhum fórum criado ainda.</p>"}
+                    </div>
+                    <button id="btn-criar-forum">Criar Novo Fórum</button>
+                `;
+                forumsContainer.style.display = "none";
+                forumDetailsContainer.style.display = "block";
+            }
+        });
+
+        // Criar Fórum
+        document.addEventListener("click", (e) => {
+            if (e.target.id === "btn-criar-forum") {
+                forumTitle.textContent = "Criar Novo Fórum";
+                forumForm.reset();
+                forumCreationContainer.style.display = "block";
+                forumDetailsContainer.style.display = "none";
+            }
+        });
+
+        // Salvar Fórum
+        forumForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const titulo = document.getElementById("forum-topic").value;
+            const regras = document.getElementById("forum-rules").value;
+
+            currentTurma.forums.push({ id: Date.now(), titulo, regras });
+            forumCreationContainer.style.display = "none";
+            alert("Fórum criado com sucesso!");
+        });
+    </script>
+</body>
+
+</html>

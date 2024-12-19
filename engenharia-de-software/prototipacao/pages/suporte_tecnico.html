@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte Técnico - Professor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .support {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        select {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4caf50;
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Suporte Técnico - Professor</h1>
+    </header>
+    <main>
+        <div class="support">
+            <h2>Suporte por Módulo</h2>
+            <form id="supportForm">
+                <label for="modulo">Selecione o Módulo:</label>
+                <select id="modulo" name="modulo" required>
+                    <option value="login">Login</option>
+                    <option value="notas">Notas</option>
+                    <option value="frequencia">Frequência</option>
+                    <option value="documentos">Documentos</option>
+                </select>
+                <button type="submit">Buscar Suporte</button>
+            </form>
+            <div id="supportContent" class="content" style="display: none;">
+                <h3 id="moduloTitle"></h3>
+                <p id="moduloDescription"></p>
+                <p id="moduloResources"></p>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('supportForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var modulo = document.getElementById('modulo').value;
+            var moduloTitle = '';
+            var moduloDescription = '';
+            var moduloResources = '';
+            switch (modulo) {
+                case 'login':
+                    moduloTitle = 'Login';
+                    moduloDescription = 'Descrição do suporte para o módulo de Login.';
+                    moduloResources = 'Recursos adicionais, como vídeos explicativos.';
+                    break;
+                case 'notas':
+                    moduloTitle = 'Notas';
+                    moduloDescription = 'Descrição do suporte para o módulo de Notas.';
+                    moduloResources = 'Recursos adicionais, como tutoriais em PDF.';
+                    break;
+                case 'frequencia':
+                    moduloTitle = 'Frequência';
+                    moduloDescription = 'Descrição do suporte para o módulo de Frequência.';
+                    moduloResources = 'Recursos adicionais, como guias de uso.';
+                    break;
+                case 'documentos':
+                    moduloTitle = 'Documentos';
+                    moduloDescription = 'Descrição do suporte para o módulo de Documentos.';
+                    moduloResources = 'Recursos adicionais, como links úteis.';
+                    break;
+            }
+            document.getElementById('supportContent').style.display = 'block';
+            document.getElementById('moduloTitle').textContent = moduloTitle;
+            document.getElementById('moduloDescription').textContent = moduloDescription;
+            document.getElementById('moduloResources').textContent = moduloResources;
+        });
+    </script>
+</body>
+
+</html>

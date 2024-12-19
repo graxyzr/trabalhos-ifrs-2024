@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header,
+        .footer {
+            background-color: #4caf50;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1,
+        .footer p {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .shortcuts {
+            margin-top: 20px;
+        }
+
+        .shortcuts a {
+            display: block;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .shortcuts a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Sistema de Login</h1>
+    </header>
+
+    <div class="container">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label for="tipo">Tipo de Login:</label>
+            <select id="tipo" onchange="mostrarCampos()">
+                <option value="">Selecione</option>
+                <option value="aluno">Aluno</option>
+                <option value="professor">Professor</option>
+            </select>
+        </div>
+
+        <form id="formLogin" action="#" method="post" onsubmit="return exibirAtalhos(event)">
+            <div id="camposLogin" class="hidden">
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" required>
+                </div>
+            </div>
+
+            <div class="form-group hidden" id="btnSubmit">
+                <button type="submit" class="btn">Login</button>
+            </div>
+        </form>
+
+        <div class="shortcuts hidden" id="atalhosAluno">
+            <a href="pages/acessar_documentos_academicos.html">Acessar Documentos Acadêmicos</a>
+            <a href="pages/acompanhar_calendario_academico.html">Acompanhar Calendário Acadêmico</a>
+            <a href="pages/comunicacao_com_professores.html">Comunicação com Professores</a>
+            <a href="pages/consulta_notas_frequencia.html">Consulta Notas e Frequência</a>
+            <a href="pages/disponibilizacao_material_didatico.html">Disponibilização de Material Didático</a>
+            <a href="pages/visualizacao_horarios_aula.html">Visualização de Horários de Aula</a>
+            <a href="pages/suporte_acessibilidade.html">Suporte a Acessibilidade</a>
+        </div>
+
+        <div class="shortcuts hidden" id="atalhosProfessor">
+            <a href="pages/avaliacao_desempenho_alunos.html">Avaliações de Desempenho</a>
+            <a href="pages/comunicacao_com_alunos.html">Comunicação com Alunos</a>
+            <a href="pages/disponibilizacao_material_didatico.html">Disponibilização de Material Didático</a>
+            <a href="pages/lancamento_de_notas.html">Lançamento de Notas</a>
+            <a href="pages/registro_de_frequencia.html">Registro de Frequência</a>
+            <a href="pages/suporte_tecnico.html">Suporte Técnico</a>
+            <a href="pages/visualizacao_horarios_aula.html">Visualização de Horários de Aula</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 SIGAA - Acadêmico. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function mostrarCampos() {
+            var tipo = document.getElementById('tipo').value;
+            var camposLogin = document.getElementById('camposLogin');
+            var btnSubmit = document.getElementById('btnSubmit');
+
+            camposLogin.classList.add('hidden');
+            btnSubmit.classList.add('hidden');
+
+            if (tipo) {
+                camposLogin.classList.remove('hidden');
+                btnSubmit.classList.remove('hidden');
+            }
+        }
+
+        function exibirAtalhos(event) {
+            event.preventDefault();
+            var tipo = document.getElementById('tipo').value;
+            var atalhosAluno = document.getElementById('atalhosAluno');
+            var atalhosProfessor = document.getElementById('atalhosProfessor');
+
+            atalhosAluno.classList.add('hidden');
+            atalhosProfessor.classList.add('hidden');
+
+            if (tipo === 'aluno') {
+                atalhosAluno.classList.remove('hidden');
+            } else if (tipo === 'professor') {
+                atalhosProfessor.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+
+</html>

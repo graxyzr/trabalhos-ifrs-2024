@@ -1,0 +1,39 @@
+1. Acesso ao Sistema:
+
+RF01: O professor deve poder se autenticar no sistema usando seu ID de usuário e senha.
+RF02: O professor deve poder recuperar ou redefinir sua senha caso a esqueça.
+
+
+2. Gerenciamento de Disciplinas:
+RF03: O professor deve ser capaz de visualizar todas as disciplinas que está ministrando no semestre atual.
+RF04: Deve ser possível adicionar materiais de curso, como slides de aula, leituras obrigatórias e listas de exercícios, nas páginas das disciplinas que ministra.
+RF05: O professor deve ter a capacidade de criar e publicar anúncios para suas turmas.
+
+
+3. Avaliação e Notas:
+RF06: O professor deve ser capaz de inserir, atualizar e publicar notas para tarefas, provas e outros trabalhos avaliativos.
+RF07: Deve poder visualizar o histórico de avaliações de cada aluno em suas disciplinas.
+
+
+4. Presença e Participação:
+RF08: O professor deve poder registrar a frequência dos alunos em cada aula.
+RF09: Deve ser capaz de visualizar e gerenciar os registros de participação de alunos em atividades de classe.
+
+
+5. Comunicação com Alunos:
+RF10: O professor deve ter acesso a um sistema de mensagens para comunicação direta com alunos individualmente ou com a classe como um todo.
+RF11: Deve ser possível receber e responder a dúvidas dos alunos sobre materiais, notas e conteúdos das aulas.
+
+
+6. Planejamento de Aulas:
+RF12: O sistema deve permitir ao professor planejar o semestre letivo, incluindo o agendamento de aulas, distribuição de temas e definição de metas de aprendizado.
+
+
+7. Relatórios e Análises:
+RF13: O professor deve ser capaz de gerar relatórios de desempenho da turma, incluindo médias de notas, distribuições de frequência e progresso das competências aprendidas.
+RF14: Deve poder acessar análises preditivas sobre potenciais problemas de aprendizagem entre os alunos, com base nos dados disponíveis.
+
+
+8. Gerenciamento de Tarefas e Prazos:
+RF15: O sistema deve permitir ao professor estabelecer, gerenciar e comunicar prazos para a entrega de trabalhos e projetos.
+RF16: O professor deve poder revisar e fornecer feedback sobre as tarefas submetidas, diretamente através da plataforma.

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Lista de Alunos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .dashboard {
+            margin-top: 2em;
+            text-align: center;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .form-container {
+            display: none;
+            margin-top: 2em;
+            padding: 2em;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .student-list {
+            margin-top: 20px;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .student-list h3 {
+            text-align: center;
+        }
+
+        .student {
+            border-bottom: 1px solid #ddd;
+            padding: 5px 0;
+        }
+
+        .student:last-child {
+            border-bottom: none;
+        }
+
+        .student p {
+            margin: 5px 0;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Consulta de Lista de Alunos</h1>
+        <p>Consulte a lista de alunos matriculados em suas disciplinas.</p>
+    </header>
+    <div class="container">
+        <div class="dashboard">
+            <h2>Escolha uma ação</h2>
+            <button id="btn-select-discipline">Selecionar Disciplina</button>
+        </div>
+
+        <div class="form-container" id="form-select-discipline">
+            <h2>Selecionar Disciplina</h2>
+            <label for="discipline">Escolha uma disciplina:</label>
+            <select id="discipline">
+                <option value="" disabled selected>Selecione uma disciplina</option>
+                <option value="matematica">Matemática</option>
+                <option value="portugues">Português</option>
+                <option value="fisica">Física</option>
+            </select>
+            <div class="actions">
+                <button id="btn-list-students">Listar Alunos</button>
+            </div>
+        </div>
+
+        <div class="form-container" id="form-student-list">
+            <h2>Lista de Alunos</h2>
+            <div class="student-list" id="student-list">
+                <h3>Selecione uma disciplina para ver os alunos</h3>
+            </div>
+            <div class="actions">
+                <button id="btn-generate-report">Gerar Relatório</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados simulados de alunos
+        const alunosPorDisciplina = {
+            matematica: [
+                { nome: "Ana Silva", email: "ana.silva@email.com" },
+                { nome: "Carlos Souza", email: "carlos.souza@email.com" }
+            ],
+            portugues: [
+                { nome: "Bruna Oliveira", email: "bruna.oliveira@email.com" },
+                { nome: "Daniel Santos", email: "daniel.santos@email.com" }
+            ],
+            fisica: [
+                { nome: "Eduardo Lima", email: "eduardo.lima@email.com" },
+                { nome: "Fernanda Costa", email: "fernanda.costa@email.com" }
+            ]
+        };
+
+        // Referências aos elementos do DOM
+        const btnSelectDiscipline = document.getElementById("btn-select-discipline");
+        const formSelectDiscipline = document.getElementById("form-select-discipline");
+        const formStudentList = document.getElementById("form-student-list");
+        const disciplineSelect = document.getElementById("discipline");
+        const btnListStudents = document.getElementById("btn-list-students");
+        const studentList = document.getElementById("student-list");
+        const btnGenerateReport = document.getElementById("btn-generate-report");
+
+        // Mostrar o formulário de seleção de disciplina
+        btnSelectDiscipline.addEventListener("click", () => {
+            formSelectDiscipline.style.display = "block";
+            formStudentList.style.display = "none";
+        });
+
+        // Listar alunos ao selecionar disciplina
+        btnListStudents.addEventListener("click", () => {
+            const disciplina = disciplineSelect.value;
+            if (disciplina && alunosPorDisciplina[disciplina]) {
+                const alunos = alunosPorDisciplina[disciplina];
+                studentList.innerHTML = alunos
+                    .map(aluno => `
+                        <div class="student">
+                            <p><strong>Nome:</strong> ${aluno.nome}</p>
+                            <p><strong>Email:</strong> ${aluno.email}</p>
+                        </div>
+                    `).join("");
+                formStudentList.style.display = "block";
+            } else {
+                studentList.innerHTML = "<h3>Disciplina não encontrada ou inválida.</h3>";
+            }
+        });
+
+        // Gerar relatório
+        btnGenerateReport.addEventListener("click", () => {
+            const disciplina = disciplineSelect.value;
+            if (disciplina && alunosPorDisciplina[disciplina]) {
+                const alunos = alunosPorDisciplina[disciplina];
+                const relatorio = alunos
+                    .map(aluno => `Nome: ${aluno.nome}, Email: ${aluno.email}`)
+                    .join("\n");
+                const blob = new Blob([relatorio], { type: "text/plain" });
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = `relatorio_${disciplina}.txt`;
+                link.click();
+            } else {
+                alert("Por favor, selecione uma disciplina válida antes de gerar o relatório.");
+            }
+        });
+    </script>
+</body>
+
+</html>

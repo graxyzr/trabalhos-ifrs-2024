@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Estágios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header,
+        footer {
+            background-color: #004d99;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .container {
+            flex: 1;
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .container h2 {
+            color: #004d99;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #004d99;
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: white;
+            background-color: #004d99;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #003366;
+        }
+
+        .btn-secondary {
+            background-color: #555;
+        }
+
+        .btn-secondary:hover {
+            background-color: #333;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Gestão de Estágios</h1>
+    </header>
+
+    <div class="container">
+        <h2>Gestão de Estágios</h2>
+
+        <!-- Lista de Estágios -->
+        <div id="lista-estagios">
+            <h3>Lista de Estágios</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aluno</th>
+                        <th>Empresa</th>
+                        <th>Supervisor</th>
+                        <th>Período</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-estagios">
+                    <!-- Dados dinâmicos -->
+                </tbody>
+            </table>
+            <button class="btn" onclick="abrirFormulario()">Cadastrar Novo Estágio</button>
+        </div>
+
+        <!-- Formulário de Estágio -->
+        <div id="formulario" class="hidden">
+            <h3 id="form-title">Cadastrar/Editar Estágio</h3>
+            <div class="form-group">
+                <label for="aluno">Nome do Aluno:</label>
+                <input type="text" id="aluno">
+            </div>
+            <div class="form-group">
+                <label for="empresa">Empresa:</label>
+                <input type="text" id="empresa">
+            </div>
+            <div class="form-group">
+                <label for="supervisor">Supervisor:</label>
+                <input type="text" id="supervisor">
+            </div>
+            <div class="form-group">
+                <label for="periodo">Período:</label>
+                <input type="text" id="periodo">
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status">
+                    <option value="Pendente">Pendente</option>
+                    <option value="Aprovado">Aprovado</option>
+                    <option value="Rejeitado">Rejeitado</option>
+                </select>
+            </div>
+            <button class="btn" onclick="salvarEstagio()">Salvar</button>
+            <button class="btn-secondary" onclick="fecharFormulario()">Cancelar</button>
+        </div>
+
+        <!-- Mensagem de feedback -->
+        <div id="mensagem" class="message hidden"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Sistema de Gestão de Estágios</p>
+    </footer>
+
+    <script>
+        const estagios = [];
+
+        function atualizarTabela() {
+            const tabela = document.getElementById('tabela-estagios');
+            tabela.innerHTML = estagios.map((estagio, index) => `
+                <tr>
+                    <td>${estagio.aluno}</td>
+                    <td>${estagio.empresa}</td>
+                    <td>${estagio.supervisor}</td>
+                    <td>${estagio.periodo}</td>
+                    <td>${estagio.status}</td>
+                    <td>
+                        <button class="btn" onclick="editarEstagio(${index})">Editar</button>
+                        <button class="btn-secondary" onclick="removerEstagio(${index})">Remover</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function abrirFormulario() {
+            document.getElementById('formulario').classList.remove('hidden');
+        }
+
+        function fecharFormulario() {
+            document.getElementById('formulario').classList.add('hidden');
+            limparFormulario();
+        }
+
+        function limparFormulario() {
+            document.getElementById('aluno').value = '';
+            document.getElementById('empresa').value = '';
+            document.getElementById('supervisor').value = '';
+            document.getElementById('periodo').value = '';
+            document.getElementById('status').value = 'Pendente';
+        }
+
+        function salvarEstagio() {
+            const aluno = document.getElementById('aluno').value;
+            const empresa = document.getElementById('empresa').value;
+            const supervisor = document.getElementById('supervisor').value;
+            const periodo = document.getElementById('periodo').value;
+            const status = document.getElementById('status').value;
+
+            if (aluno && empresa && supervisor && periodo && status) {
+                estagios.push({ aluno, empresa, supervisor, periodo, status });
+                atualizarTabela();
+                fecharFormulario();
+                mostrarMensagem("Estágio cadastrado com sucesso!", "success");
+            } else {
+                mostrarMensagem("Por favor, preencha todos os campos!", "error");
+            }
+        }
+
+        function editarEstagio(index) {
+            const estagio = estagios[index];
+            document.getElementById('aluno').value = estagio.aluno;
+            document.getElementById('empresa').value = estagio.empresa;
+            document.getElementById('supervisor').value = estagio.supervisor;
+            document.getElementById('periodo').value = estagio.periodo;
+            document.getElementById('status').value = estagio.status;
+
+            removerEstagio(index);
+            abrirFormulario();
+        }
+
+        function removerEstagio(index) {
+            estagios.splice(index, 1);
+            atualizarTabela();
+            mostrarMensagem("Estágio removido com sucesso!", "success");
+        }
+
+        function mostrarMensagem(msg, type) {
+            const mensagemDiv = document.getElementById('mensagem');
+            mensagemDiv.textContent = msg;
+            mensagemDiv.className = `message ${type}`;
+            mensagemDiv.classList.remove('hidden');
+
+            setTimeout(() => {
+                mensagemDiv.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

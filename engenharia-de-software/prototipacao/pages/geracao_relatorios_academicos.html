@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geração de Relatórios Acadêmicos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header,
+        .footer {
+            background-color: #4caf50;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header h1,
+        .footer p {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Geração de Relatórios Acadêmicos</h1>
+    </header>
+
+    <div class="container">
+        <h2>Selecione os parâmetros do relatório</h2>
+        <form id="formRelatorio" action="#" method="post">
+            <div class="form-group">
+                <label for="tipoRelatorio">Tipo de Relatório:</label>
+                <select id="tipoRelatorio" name="tipoRelatorio" required>
+                    <option value="">Selecione</option>
+                    <option value="desempenho">Desempenho dos Alunos</option>
+                    <option value="frequencia">Frequência dos Alunos</option>
+                    <option value="notas">Notas Finais</option>
+                    <option value="estagios">Acompanhamento de Estágios</option>
+                    <option value="tccs">Acompanhamento de TCCs</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dataInicio">Data de Início:</label>
+                <input type="date" id="dataInicio" name="dataInicio" required>
+            </div>
+            <div class="form-group">
+                <label for="dataFim">Data de Fim:</label>
+                <input type="date" id="dataFim" name="dataFim" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Gerar Relatório</button>
+            </div>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 SIGAA Acadêmico. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('formRelatorio').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var tipoRelatorio = document.getElementById('tipoRelatorio').value;
+            var dataInicio = document.getElementById('dataInicio').value;
+            var dataFim = document.getElementById('dataFim').value;
+
+            console.log('Tipo de Relatório:', tipoRelatorio);
+            console.log('Data de Início:', dataInicio);
+            console.log('Data de Fim:', dataFim);
+
+            alert('Relatório gerado com sucesso!');
+        });
+    </script>
+</body>
+
+</html>

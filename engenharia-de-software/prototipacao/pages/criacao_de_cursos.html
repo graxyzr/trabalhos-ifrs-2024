@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criação de Cursos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header,
+    .footer {
+      background-color: #4caf50;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .header h1,
+    .footer p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input[type="text"],
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+    }
+
+    .btn {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <h1>Sistema de Criação de Cursos</h1>
+  </header>
+
+  <div class="container">
+    <h2>Criação de Cursos</h2>
+    <form action="#" method="post">
+      <div class="form-group">
+        <label for="nomeCurso">Nome do Curso:</label>
+        <input type="text" id="nomeCurso" name="nomeCurso" required>
+      </div>
+      <div class="form-group">
+        <label for="codigoCurso">Código do Curso:</label>
+        <input type="text" id="codigoCurso" name="codigoCurso" required>
+      </div>
+      <div class="form-group">
+        <label for="descricaoCurso">Descrição do Curso:</label>
+        <textarea id="descricaoCurso" name="descricaoCurso" rows="5" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="duracaoCurso">Duração do Curso (em anos):</label>
+        <input type="text" id="duracaoCurso" name="duracaoCurso" required>
+      </div>
+      <div class="form-group">
+        <label for="nivelCurso">Nível do Curso:</label>
+        <select id="nivelCurso" name="nivelCurso" required>
+          <option value="" disabled selected>Selecione o nível do curso</option>
+          <option value="tecnico">Técnico</option>
+          <option value="graduacao">Graduação</option>
+          <option value="posGraduacao">Pós-Graduação</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="campusCurso">Campus:</label>
+        <select id="campusCurso" name="campusCurso" required>
+          <option value="" disabled selected>Selecione um campus</option>
+          <option value="Alvorada">Alvorada</option>
+          <option value="Bento Gonçalves">Bento Gonçalves</option>
+          <option value="Canoas">Canoas</option>
+          <option value="Caxias do Sul">Caxias do Sul</option>
+          <option value="Erechim">Erechim</option>
+          <option value="Farroupilha">Farroupilha</option>
+          <option value="Feliz">Feliz</option>
+          <option value="Ibirubá">Ibirubá</option>
+          <option value="Osório">Osório</option>
+          <option value="Porto Alegre">Porto Alegre</option>
+          <option value="Restinga">Restinga (Porto Alegre)</option>
+          <option value="Rio Grande">Rio Grande</option>
+          <option value="Rolante">Rolante</option>
+          <option value="Sertão">Sertão</option>
+          <option value="Vacaria">Vacaria</option>
+          <option value="Veranópolis">Veranópolis</option>
+          <option value="Viamão">Viamão</option>
+        </select>
+      </div>
+      <button type="submit" class="btn">Criar Curso</button>
+    </form>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2024 SIGAA Acadêmico. Todos os direitos reservados.</p>
+  </footer>
+</body>
+
+</html>

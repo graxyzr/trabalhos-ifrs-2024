@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicação com Aluno</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .dashboard {
+            margin-top: 2em;
+            text-align: center;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .form-container {
+            display: none;
+            margin-top: 2em;
+            padding: 2em;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #007bff;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .message-list {
+            margin-top: 2em;
+            padding: 1em;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .message p {
+            margin: 5px 0;
+        }
+
+        .message p.sender {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Comunicação com Aluno</h1>
+            <p>Envie e receba mensagens de forma simples e eficiente.</p>
+        </header>
+
+        <main>
+            <section class="dashboard">
+                <h2>Escolha uma ação</h2>
+                <button id="btn-select-student">Selecionar Aluno</button>
+                <button id="btn-view-messages">Ver Mensagens</button>
+            </section>
+
+            <section class="form-container" id="form-select-student">
+                <h2>Selecionar Turma e Aluno</h2>
+                <form id="student-form">
+                    <label for="turma">Escolha uma turma:</label>
+                    <select id="turma" required>
+                        <option value="" disabled selected>Selecione a turma</option>
+                        <option value="turma1">Turma 1</option>
+                        <option value="turma2">Turma 2</option>
+                        <option value="turma3">Turma 3</option>
+                    </select>
+
+                    <label for="aluno">Escolha um aluno:</label>
+                    <select id="aluno" disabled required>
+                        <option value="" disabled selected>Selecione o aluno</option>
+                    </select>
+
+                    <button type="submit" id="btn-select-student-confirm">Selecionar Aluno</button>
+                </form>
+                <div class="status" id="student-status"></div>
+            </section>
+
+            <section class="form-container" id="form-send-message">
+                <h2>Enviar Mensagem</h2>
+                <form id="message-form">
+                    <textarea id="message-content" placeholder="Digite sua mensagem" required></textarea>
+                    <button type="submit">Enviar Mensagem</button>
+                </form>
+                <div class="status" id="message-status"></div>
+            </section>
+
+            <section class="form-container" id="form-view-messages">
+                <h2>Mensagens Recebidas</h2>
+                <div class="message-list" id="message-list">
+                    <p>Nenhuma mensagem recebida ainda.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const btnSelectStudent = document.getElementById("btn-select-student");
+        const btnViewMessages = document.getElementById("btn-view-messages");
+
+        const formSelectStudent = document.getElementById("form-select-student");
+        const formSendMessage = document.getElementById("form-send-message");
+        const formViewMessages = document.getElementById("form-view-messages");
+
+        const turmaSelect = document.getElementById("turma");
+        const alunoSelect = document.getElementById("aluno");
+        const studentForm = document.getElementById("student-form");
+        const messageForm = document.getElementById("message-form");
+
+        const studentStatus = document.getElementById("student-status");
+        const messageStatus = document.getElementById("message-status");
+        const messageList = document.getElementById("message-list");
+
+        let selectedStudent = ""; // Aluno selecionado
+        const messages = []; // Mensagens armazenadas
+
+        const alunosPorTurma = {
+            turma1: ["Ana", "Bruno", "Carlos"],
+            turma2: ["Daniela", "Eduardo", "Fernanda"],
+            turma3: ["Gabriela", "Henrique", "Isabela"]
+        };
+
+        // Mostrar formulário de seleção de turma e aluno
+        btnSelectStudent.addEventListener("click", () => {
+            formSelectStudent.style.display = "block";
+            formSendMessage.style.display = "none";
+            formViewMessages.style.display = "none";
+        });
+
+        // Atualizar alunos ao selecionar turma
+        turmaSelect.addEventListener("change", () => {
+            const turma = turmaSelect.value;
+            alunoSelect.innerHTML = `<option value="" disabled selected>Selecione o aluno</option>`;
+            alunosPorTurma[turma].forEach(aluno => {
+                const option = document.createElement("option");
+                option.value = aluno;
+                option.textContent = aluno;
+                alunoSelect.appendChild(option);
+            });
+            alunoSelect.disabled = false;
+        });
+
+        // Selecionar aluno
+        studentForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const aluno = alunoSelect.value;
+            if (aluno) {
+                selectedStudent = aluno;
+                studentStatus.textContent = `Aluno "${selectedStudent}" selecionado com sucesso.`;
+                formSendMessage.style.display = "block";
+                studentForm.reset();
+                alunoSelect.disabled = true;
+            } else {
+                studentStatus.textContent = "Por favor, selecione um aluno.";
+            }
+        });
+
+        // Enviar mensagem
+        messageForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const messageContent = document.getElementById("message-content").value;
+            if (messageContent) {
+                messages.push({ sender: "Professor", student: selectedStudent, content: messageContent });
+                messageStatus.textContent = `Mensagem enviada para "${selectedStudent}" com sucesso.`;
+                messageForm.reset();
+            } else {
+                messageStatus.textContent = "Por favor, insira uma mensagem.";
+            }
+        });
+
+        // Mostrar mensagens
+        btnViewMessages.addEventListener("click", () => {
+            formSelectStudent.style.display = "none";
+            formSendMessage.style.display = "none";
+            formViewMessages.style.display = "block";
+            if (messages.length > 0) {
+                messageList.innerHTML = messages.map(msg => `
+                    <div class="message">
+                        <p class="sender">De: ${msg.sender} para ${msg.student}</p>
+                        <p>${msg.content}</p>
+                    </div>
+                `).join("");
+            } else {
+                messageList.innerHTML = "<p>Nenhuma mensagem recebida ainda.</p>";
+            }
+        });
+    </script>
+</body>
+
+</html>

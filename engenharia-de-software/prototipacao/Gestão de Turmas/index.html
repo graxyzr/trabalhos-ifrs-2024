@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Turmas</title>
+    <style>
+        /* Estilos CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        h1,
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        form {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #4CAF50;
+            color: white;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Gestão de Turmas</h1>
+    </header>
+    <main>
+        <section id="form-section">
+            <h2>Criar Nova Turma</h2>
+            <form id="turma-form">
+                <label for="nome-turma">Nome da Turma:</label>
+                <input type="text" id="nome-turma" placeholder="Digite o nome da turma" required>
+
+                <label for="curso">Curso:</label>
+                <input type="text" id="curso" placeholder="Digite o nome do curso" required>
+
+                <label for="professor">Professor Responsável:</label>
+                <input type="text" id="professor" placeholder="Digite o nome do professor" required>
+
+                <label for="horario">Horário:</label>
+                <input type="text" id="horario" placeholder="Ex: Segundas 14h - 16h" required>
+
+                <button type="submit">Salvar Turma</button>
+            </form>
+        </section>
+
+        <section id="list-section">
+            <h2>Turmas Cadastradas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome da Turma</th>
+                        <th>Curso</th>
+                        <th>Professor</th>
+                        <th>Horário</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="turma-list">
+                    <!-- Turmas cadastradas aparecerão aqui -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 - Sistema de Gestão de Turmas</p>
+    </footer>
+    <script>
+        // Código JavaScript
+        document.getElementById('turma-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Pega os valores do formulário
+            const nomeTurma = document.getElementById('nome-turma').value;
+            const curso = document.getElementById('curso').value;
+            const professor = document.getElementById('professor').value;
+            const horario = document.getElementById('horario').value;
+
+            // Cria uma nova linha na tabela
+            const turmaList = document.getElementById('turma-list');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${nomeTurma}</td>
+                <td>${curso}</td>
+                <td>${professor}</td>
+                <td>${horario}</td>
+                <td>
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn">Excluir</button>
+                </td>
+            `;
+
+            // Adiciona evento de exclusão
+            newRow.querySelector('.delete-btn').addEventListener('click', function () {
+                turmaList.removeChild(newRow);
+            });
+
+            // Adiciona evento de edição
+            newRow.querySelector('.edit-btn').addEventListener('click', function () {
+                document.getElementById('nome-turma').value = nomeTurma;
+                document.getElementById('curso').value = curso;
+                document.getElementById('professor').value = professor;
+                document.getElementById('horario').value = horario;
+                turmaList.removeChild(newRow);
+            });
+
+            // Adiciona a nova linha à lista
+            turmaList.appendChild(newRow);
+
+            // Limpa os campos do formulário
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acompanhamento de Estágios e TCCs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header,
+    .footer {
+      background-color: #4caf50;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .header h1,
+    .footer p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input[type="text"],
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .btn {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ccc;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <h1>Sistema de Acompanhamento de Estágios e TCCs</h1>
+  </header>
+
+  <div class="container">
+    <h2>Acompanhamento de Estágios e TCCs</h2>
+    <div class="form-group">
+      <label for="filtroCurso">Curso:</label>
+      <select id="filtroCurso">
+        <option value="">Todos</option>
+        <option value="curso1">Curso 1</option>
+        <option value="curso2">Curso 2</option>
+        <option value="curso3">Curso 3</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="filtroTipo">Tipo:</label>
+      <select id="filtroTipo">
+        <option value="">Todos</option>
+        <option value="estagio">Estágio</option>
+        <option value="tcc">TCC</option>
+      </select>
+    </div>
+
+    <button class="btn" onclick="filtrar()">Filtrar</button>
+
+    <table id="tabelaEstagiosTCCs">
+      <thead>
+        <tr>
+          <th>Nome do Aluno</th>
+          <th>Curso</th>
+          <th>Tipo</th>
+          <th>Título</th>
+          <th>Orientador</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>João Silva</td>
+          <td>Curso 1</td>
+          <td>Estágio</td>
+          <td>Desenvolvimento de Software</td>
+          <td>Prof. Carlos</td>
+          <td>Em andamento</td>
+        </tr>
+        <tr>
+          <td>Maria Souza</td>
+          <td>Curso 2</td>
+          <td>TCC</td>
+          <td>Segurança da Informação</td>
+          <td>Prof. Ana</td>
+          <td>Concluído</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2024 SIGAA Acadêmico. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    function filtrar() {
+      var filtroCurso = document.getElementById('filtroCurso').value;
+      var filtroTipo = document.getElementById('filtroTipo').value;
+      var tabela = document.getElementById('tabelaEstagiosTCCs').getElementsByTagName('tbody')[0];
+      var linhas = tabela.getElementsByTagName('tr');
+
+      for (var i = 0; i < linhas.length; i++) {
+        var curso = linhas[i].getElementsByTagName('td')[1].textContent;
+        var tipo = linhas[i].getElementsByTagName('td')[2].textContent;
+        linhas[i].style.display = '';
+
+        if (filtroCurso && curso !== filtroCurso) {
+          linhas[i].style.display = 'none';
+        }
+
+        if (filtroTipo && tipo !== filtroTipo) {
+          linhas[i].style.display = 'none';
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
